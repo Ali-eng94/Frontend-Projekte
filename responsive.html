@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        ul{
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 15px;
+            margin: 0;
+            }
+            li{
+                list-style: none;
+            }
+            a{
+                text-decoration-line: none;
+                color: white;
+            }
+            a:hover{
+                color: yellow;
+            }
+            main{
+                display: flex;
+                height: 90vh;
+            }
+            section{
+               flex-grow: 3;
+               padding: 10px;
+            }
+            aside{
+                background-color: bisque;
+                flex-grow: 1;
+                padding:10px ;
+            }
+            @media screen and (max-width:700px) {
+                ul{
+                    gap: 15px;
+                    padding: 10px;
+                }
+                main{
+                    
+                    flex-direction: column;
+                }
+                section{
+                    flex-grow: 7;
+                }
+
+            }
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">ABOUT</a></li>
+        <li><a href="">SERVICES</a></li>
+        <li><a href="">CONTACT</a></li>
+    </ul>
+
+    <main>
+        <section>
+            <h1>Main contact</h1>
+            <p>this is main contact</p>
+        </section>
+        <aside>
+            <h2>side contact</h2>
+            <p>this is side contact</p>
+        </aside>
+    </main>
+</body>
+</html>

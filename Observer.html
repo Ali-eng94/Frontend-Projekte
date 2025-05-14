@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .nav-bar{
+            background-color: gray;
+            display: flex;
+            font-size: 30px;
+            justify-content: space-around;
+            padding: 5px;
+            margin: 0;
+            position: fixed;
+            width: 100%;
+        }
+        a{
+            text-decoration: none;
+            color: azure;
+        }
+        a:hover{
+            color: aqua;
+        }
+        #red{
+            height: 100vh;
+            background-color: red;
+        }
+        #green{
+            height: 100vh;
+            background-color: green;
+        }
+        #yellow{
+            height: 100vh;
+            background-color: yellow;
+        }
+        #blue{
+            height: 100vh;
+            background-color: blue;
+        }
+        #black{
+            height: 100vh;
+            background-color: black;
+        }
+        .active{
+            color: gold;
+        }
+        
+        @media screen and (max-width:800px) {
+            .nav-bar {
+                display: block;
+                align-items: center;
+                justify-items: center;
+                padding: 10 px 0 10px 0;
+                
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div><a href="#red" class="nav-link">red</a></div>
+        <div><a href="#green" class="nav-link">green</a></div>
+        <div><a href="#yellow" class="nav-link">yellow</a></div>
+        <div><a href="#blue" class="nav-link">blue</a></div>
+        <div><a href="#black" class="nav-link">black</a></div>
+    </nav>
+    <div id="red" class="div1"></div>
+    <div id="green" class="div1"></div>
+    <div id="yellow" class="div1"></div>
+    <div id="blue" class="div1"></div>
+    <div id="black" class="div1"></div>
+    |<script>
+        const observerOptions = {
+            threshold:0.8
+        }
+
+        let observer = new IntersectionObserver(changeLinks,observerOptions);
+
+        let sections = document.getElementsByClassName('div1');
+        
+        [...sections].forEach(function(section){
+            observer.observe(section);
+        })
+
+        function changeLinks(elements){
+            elements.forEach(function(element){
+                if(element.isIntersecting){
+                    document.querySelectorAll('nav a').forEach(function(link){
+                        link.classList.remove('active');
+                        if(link.getAttribute('href') === '#' + element.target.id){
+                            link.classList.add('active');
+                        }
+                    })
+                }
+            })
+        }
+
+    </script>
+</body>
+</html>
