@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Hover</title>
+</head>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+div.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 900px;
+    
+}
+.image1 {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    transition: all 300ms ease-in-out;
+    background: url('https://images.pexels.com/photos/371589/pexels-photo-371589.jpeg?cs=srgb&dl=baume-berge-feld-371589.jpg&fm=jpg') center center no-repeat;
+    background-size: 100%;
+}
+.image2 {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    transition: all 300ms ease-in-out;
+    background: url('https://img.fotocommunity.com/sonnenuntergang-an-der-nordsee-bei-cuxhaven-2fd3f7ac-743c-483c-8dab-bdffa6ce22a5.jpg?height=1080') center center no-repeat;
+    background-size: 100%;
+}
+.image3 {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    transition: all 300ms ease-in-out;
+    background: url('https://img.welt.de/img/vermischtes/bilder-des-tages/mobile202551804/2112507977-ci102l-w1024/bdt-2710.jpg') center center no-repeat;
+    background-size: 100%;
+}
+.image4 {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    transition: all 300ms ease-in-out;
+    background: url('https://img.welt.de/img/vermischtes/bilder-des-tages/mobile181804890/4631358947-ci16x9-w1200/FINLAND-WEATHER.jpg') center center no-repeat;
+    background-size: 100%;
+}
+div.container:hover > :not(:hover){
+    opacity: 0.5;
+    filter: blur(10px);
+    transform: scale(0.8);
+    cursor: pointer;
+}         
+  
+</style>
+<body>
+    <main>
+        <div class="container">
+            <div class="image1"></div>
+            <div class="image2"></div>
+            <div class="image3"></div>
+            <div class="image4"></div>
+        </div>
+    </main>    
+</body>
+</html>
