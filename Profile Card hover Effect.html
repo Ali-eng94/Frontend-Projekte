@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card hover Effect</title>
+</head>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+.container{
+    display: flex;
+    gap: 40px;
+}
+.card{
+    width: 300px;
+    height: 379px;
+    border-radius: 20px;
+    background: url('https://cdn.pixabay.com/photo/2016/08/11/05/24/photographer-1584840_1280.jpg') center center no-repeat;
+    background-size: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: 0.85s ease;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.card:hover{
+    background: url('https://cdn.pixabay.com/photo/2016/08/11/05/24/photographer-1584840_1280.jpg') left center no-repeat;
+    background-size: 500px;
+}
+.card.alt {
+    background: url('https://timeweb.com/ru/community/article/15/15d1c7d25e936e26523a725e00d64905.jpeg') center center no-repeat;
+    background-size: 300px;
+}
+.card.alt:hover {
+    background: url('https://timeweb.com/ru/community/article/15/15d1c7d25e936e26523a725e00d64905.jpeg') right center no-repeat;
+    background-size: 500px;
+}
+</style>
+<body>
+    <div class="container">
+        <div class="card"></div>
+        <div class="card alt"></div>
+    </div>
+</body>
+</html>

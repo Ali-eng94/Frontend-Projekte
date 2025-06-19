@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Text to Speech</title>
+</head>
+<style>
+ body {
+    margin: 0;
+    padding: 0;
+   
+ }
+ .section{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:url('https://d27jswm5an3efw.cloudfront.net/app/uploads/2019/04/audio-file-types-17.jpg')   no-repeat;
+    background-size: 100%;
+ }   
+ div {
+    width: 40%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid gray;
+    flex-direction: column;
+    gap: 25px;
+    backdrop-filter: blur(15px);
+ }
+ h1{
+    color: white;
+    font-size: 32px;
+ }
+ input{
+    width: 60%;
+    height: 50px;
+    border-radius: 30px;
+ }
+ button {
+    width: 40%;
+    height: 40px;
+    border-radius: 30px;
+    border: 1px solid white;
+ }
+ button:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #1dc69099;
+ }
+ button:active {
+    transform: scale(0.9);
+ }
+</style>
+<body>
+    <div class="section">
+        <div>
+            <h1>Wellcome to my Simple Text to Speech</h1>
+            <input placeholder="Type Something...." id="text">
+            <button onclick="speechSynthesis.speak(new SpeechSynthesisUtterance(text.value))">Speech &#xf028;</button>
+        </div>
+    </div>    
+</body>
+</html>
