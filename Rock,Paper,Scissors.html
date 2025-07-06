@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock,Paper,Scissors</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background: url('https://www.playworks.org/wp-content/uploads/2017/07/bitmap-1.jpg') center center no-repeat;
+            background-size: 100%;
+        }
+        main {
+            display:flex ;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 3px solid gray;
+            border-radius: 20px;
+            height: 700px;
+            width: 700px;
+        }
+        h1 {
+            color: black;
+            font-size: 50px;
+        }
+        h3 {
+            color: black;
+            font-size: 30px;
+        }
+        button {
+            padding: 10px;
+            width: 120px;
+        }
+        
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Rock,Paper,Scissors</h1>
+        <div class="buttons">
+            <button onclick="play('rock')">Rock</button>
+            <button onclick="play('paper')">Paper</button>
+            <button onclick="play('scissors')">Scissors</button>
+        </div>
+        <h2 id="result"></h2>
+        <h1>AI score</h1>
+        <h3 id="aiS">0</h3>
+        <h1>Player score</h1>
+        <h3 id="playerS">0</h3>
+    </main>    
+    
+    <script>
+        let playerScore = 0;
+        let aiScore = 0;
+        function play(playerChoice){
+            if(aiScore<10 && playerScore<10){
+                const computerChoice = getComputerChoice();
+                const result = determineWinner(playerChoice,computerChoice)
+                 displayResult(playerChoice,computerChoice,result);
+                 updateScore(result);
+                 CheckEndGame();
+            }
+            
+        }
+
+        function getComputerChoice(){
+            const choices = ['rock' , 'paper','scissors'];
+            const randomIndex = Math.floor(Math.random()*3);
+            return choices[randomIndex];
+        }
+
+        function determineWinner(player,computer){
+            if(player===computer){
+                return 'draw';
+            }
+            if((player==='rock' && computer==='scissors')||
+            (player==='scissors' && computer==='paper')|| 
+            (player==='paper' && computer==='rock')
+            ){
+                return 'you win';
+            }
+            return 'you lose';
+        }
+
+        function displayResult(playerChoice,computerChoice,result){
+            const r = document.getElementById("result");
+            r.innerHTML = `you choose ${playerChoice}.<br>
+            the comuter choose ${computerChoice}.<br>
+            ${result}`
+
+        }
+
+        function updateScore(result){
+            if(result === 'you win'){
+                playerScore++;
+            }else if(result==='you lose'){
+                aiScore++;
+            }
+            const aiS = document.getElementById('aiS');
+            const playerS = document.getElementById('playerS');
+            aiS.innerHTML = aiScore;
+            playerS.innerHTML = playerScore;
+        }
+
+        function CheckEndGame(){
+            if(aiScore===10){
+                document.getElementById('result').innerHTML= "you lost the game";
+            }
+            if(playerScore===10){
+                document.getElementById('result').innerHTML= "you win the game";
+            }
+        }
+
+
+        
+    </script>
+</body>
+</html>
