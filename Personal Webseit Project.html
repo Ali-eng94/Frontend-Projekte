@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Website</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+        }
+
+        .navbar li {
+            float: left;
+        }
+
+        .navbar li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar li a:hover {
+            background-color: #111;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            .navbar li {
+                float: none;
+                width: 100%;
+            }
+        }
+
+        /* Seiteninhalt */
+        .content {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a192f 0%, #020c1b 100%);
+            width: 100%;
+            text-align: center;
+            padding-left: 260px;
+        }
+
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            z-index: 2;
+        }
+
+        .greeting {
+            color: #64ffda;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.2s forwards;
+        }
+
+        .name {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            opacity: 0;
+            animation: fadeInUp 1s 0.4s forwards;
+            color: white;
+            font-family: latin;
+        }
+
+        .title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #8892b0;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.6s forwards;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.8s forwards;
+            color: white;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1s 1s forwards;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn.pulse {
+            background: #64ffda;
+            color: #0a192f;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn.pulse:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
+        }
+
+        .cta-btn.secondary {
+            border: 1px solid #64ffda;
+            color: #64ffda;
+        }
+
+        .cta-btn.secondary:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        /* Typing Animation */
+        .typed-text {
+            color: #64ffda;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background: #64ffda;
+            animation: blink 1s infinite;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            opacity: 0;
+            animation: fadeIn 1s 1.5s forwards;
+        }
+
+        .mouse {
+            width: 25px;
+            height: 40px;
+            border: 2px solid #64ffda;
+            border-radius: 13px;
+            position: relative;
+        }
+
+        .mouse::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: #64ffda;
+            border-radius: 2px;
+            animation: scrollDown 2s infinite;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes scrollDown {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(-50%);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(15px) translateX(-50%);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigationsleiste -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home">Startseite</a></li>
+            <li><a href="#about">Über uns</a></li>
+            <li><a href="#services">Dienstleistungen</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hauptinhalt -->
+    <div class="content">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="text-animation">
+                    <h4 class="greeting">Hallo, mein Name ist</h4>
+                    <h1 class="name">Ali Haji</h1>
+                    <h2 class="title">
+                        Ich bin <span class="typed-text"></span><span class="cursor">&nbsp;</span>
+                    </h2>
+                </div>
+
+                <p class="description">Ich entwickele moderne, performante Web-Anwendungen mit Fokus auf UX und Clean
+                    Code.</p>
+
+                <div class="cta-container">
+                    <a href="#projects" class="cta-btn pulse">Meine Projekte</a>
+                    <a href="#contact" class="cta-btn secondary">Kontakt</a>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <div class="mouse"></div>
+            </div>
+
+            <canvas id="particles-js"></canvas>
+        </section>
+
+
+    </div>
+
+    <!-- Fußzeile -->
+    <footer>
+        <p>&copy; 2025 Meine Website. Alle Rechte vorbehalten.</p>
+    </footer>
+</body>
+ <script>
+    // Typing Animation
+const typedTextSpan = document.querySelector(".typed-text");
+const cursorSpan = document.querySelector(".cursor");
+
+const textArray = ["Web Developer", "UX Enthusiast", "React Specialist", "Problem Solver"];
+const typingDelay = 200;
+const erasingDelay = 100;
+const newTextDelay = 2000;
+let textArrayIndex = 0;
+let charIndex = 0;
+
+function type() {
+  if (charIndex < textArray[textArrayIndex].length) {
+    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(type, typingDelay);
+  } else {
+    setTimeout(erase, newTextDelay);
+  }
+}
+
+function erase() {
+  if (charIndex > 0) {
+    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+    charIndex--;
+    setTimeout(erase, erasingDelay);
+  } else {
+    textArrayIndex++;
+    if(textArrayIndex>=textArray.length) textArrayIndex=0;
+    setTimeout(type, typingDelay + 1100);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  setTimeout(type, newTextDelay + 250);
+});
+
+// Particle.js Background
+document.addEventListener("DOMContentLoaded", function() {
+  const canvas = document.getElementById("particles-js");
+  if(canvas) {
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#64ffda" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5, "random": true },
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": true, "distance": 150, "color": "#64ffda", "opacity": 0.4, "width": 1 },
+        "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" }
+        }
+      }
+      });
+      
+    }
+});
+ </script>
+</html>
