@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max Mustermann | Elite Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #fd79a8;
+            --gold: #fdcb6e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Montserrat';
+            src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Luxus Header mit Gold-Akzenten */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem 5%;
+            border-bottom: 1px solid rgba(253, 203, 110, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--dark), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--dark), var(--primary));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(45, 52, 54, 0.2);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover:before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(45, 52, 54, 0.3);
+        }
+
+        /* Hero-Section mit Parallax-Effekt */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            margin-top: -80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            animation: fadeInUp 1s ease;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(45deg, var(--dark), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: #666;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            right: 5%;
+            width: 50%;
+            max-width: 700px;
+            animation: fadeInRight 1s ease;
+            z-index: 1;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .gold-accent {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Fähigkeiten Section */
+        .skills {
+            padding: 8rem 5%;
+            background: white;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(253, 203, 110, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 8rem 5%;
+            background: var(--light);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(45, 52, 54, 0.8), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .portfolio-overlay p {
+            color: rgba(255, 255, 255, 0.8);
+            transform: translateY(20px);
+            transition: transform 0.3s 0.1s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay h3,
+        .portfolio-item:hover .portfolio-overlay p {
+            transform: translateY(0);
+        }
+
+        /* Kontakt Section */
+        .contact {
+            padding: 8rem 5%;
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-text p, .contact-text a {
+            color: #666;
+            text-decoration: none;
+            line-height: 1.7;
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-light);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 5rem 5% 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .footer-column p {
+            color: #b2b2b2;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b2b2b2;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 120px;
+                height: auto;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 3rem;
+            }
+
+            .hero-bg {
+                position: relative;
+                right: auto;
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Luxus Header -->
+    <header id="header">
+        <nav>
+            <div class="logo">Ali Haji</div>
+            <ul class="nav-links">
+                <li><a href="#home">Start</a></li>
+                <li><a href="#skills">Fähigkeiten</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <a href="#contact" class="cta-button">Projekt starten</a>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </nav>
+    </header>
+
+    <!-- Hero-Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Ali Haji</h1>
+            <p><span class="gold-accent">Elite Full-Stack Developer</span> mit Fokus auf hochwertige, maßgeschneiderte Lösungen für anspruchsvolle Kunden.</p>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <a href="#portfolio" class="cta-button">Meine Arbeiten</a>
+                <a href="#contact" style="display: flex; align-items: center; color: var(--primary); font-weight: 600; text-decoration: none;">
+                    <i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i> Kontakt aufnehmen
+                </a>
+            </div>
+        </div>
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Developer bei der Arbeit">
+        </div>
+    </section>
+
+    <!-- Fähigkeiten Section -->
+    <section class="skills" id="skills">
+        <div class="section-title">
+            <h2>Meine Expertise</h2>
+            <p>Spezialisiert auf moderne Technologien und erstklassige Lösungen</p>
+        </div>
+        <div class="skills-container">
+            <div class="skill-card">
+                <i class="fas fa-code"></i>
+                <h3>Full-Stack Entwicklung</h3>
+                <p>Komplette Web-Applikationen mit React, Node.js und modernen Frameworks für maximale Performance und Benutzerfreundlichkeit.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile Entwicklung</h3>
+                <p>Native und Cross-Platform Apps für iOS und Android mit React Native und Flutter für ein nahtloses Nutzererlebnis.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Performance Optimierung</h3>
+                <p>Professionelle Analyse und Optimierung Ihrer bestehenden Anwendungen für bessere Ladezeiten und Nutzererfahrung.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-title">
+            <h2>Ausgewählte Projekte</h2>
+            <p>Eine Auswahl meiner hochwertigsten Arbeiten</p>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Projekt 1">
+                <div class="portfolio-overlay">
+                    <h3>Luxus E-Commerce Plattform</h3>
+                    <p>Maßgeschneiderte Lösung für einen High-End Modehändler</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Projekt 2">
+                <div class="portfolio-overlay">
+                    <h3>Fintech Dashboard</h3>
+                    <p>Interaktives Analytics-Panel für eine Privatbank</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Projekt 3">
+                <div class="portfolio-overlay">
+                    <h3>Immobilien Management System</h3>
+                    <p>Custom CRM für einen Premium-Immobilienanbieter</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakt Section -->
+    <section class="contact" id="contact">
+        <div class="section-title">
+            <h2>Kontaktieren Sie mich</h2>
+            <p>Bereit für Ihr nächstes Premium-Projekt?</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Adresse</h3>
+                        <p>Duisburger Straße.154 ,47166 Duisburg</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Email</h3>
+                        <a href="mailto:alihaci55553@gmail.com">alihaci55553@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Telefon</h3>
+                        <a href="tel:+4917662352042">+4917662352042</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Ihre Nachricht</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button" style="width: 100%;">Nachricht senden</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Ali Haji</h3>
+                <p>Premium Webentwicklung und maßgeschneiderte Softwarelösungen für anspruchsvolle Kunden.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #b2b2b2; text-decoration: none;">Start</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #b2b2b2; text-decoration: none;">Fähigkeiten</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #b2b2b2; text-decoration: none;">Portfolio</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #b2b2b2; text-decoration: none;">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #b2b2b2; text-decoration: none;">Webentwicklung</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #b2b2b2; text-decoration: none;">App Entwicklung</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #b2b2b2; text-decoration: none;">UI/UX Design</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #b2b2b2; text-decoration: none;">Consulting</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Ali Haji. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header Scroll-Effekt
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '1rem 5%';
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.padding = '1.5rem 5%';
+                header.style.background = 'rgba(255, 255, 255, 0.96)';
+            }
+        });
+
+        // Mobile Navigation
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Glatte Scroll-Animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
