@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE CRISTAL | Premium Kristallwelten</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #9c27b0;
+            --secondary: #673ab7;
+            --accent: #ff9800;
+            --dark: #121212;
+            --light: #f8f8f8;
+            --overlay: rgba(20, 20, 30, 0.85);
+            --transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --shadow-lg: 0 30px 60px -15px rgba(0, 0, 0, 0.4);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--light);
+            background-color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Premium Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.8rem 5vw;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            padding: 1.2rem 5vw;
+            background: rgba(10, 5, 20, 0.98);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: var(--accent);
+            margin-right: 12px;
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            display: inline-block;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            margin-left: 3rem;
+            box-shadow: 0 10px 20px rgba(156, 39, 176, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(156, 39, 176, 0.4);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger i {
+            font-size: 1.8rem;
+            color: var(--light);
+        }
+
+        /* Hero Section mit Partikelanimation */
+        .hero {
+            height: 100vh;
+            min-height: 800px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 0 5vw;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay);
+            z-index: 1;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+            background-size: cover;
+            animation: zoomEffect 20s infinite alternate;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.6s forwards;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s 0.9s forwards;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--light);
+            box-shadow: 0 10px 20px rgba(156, 39, 176, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--light);
+            color: var(--light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* Kristall-Partikel Animation */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            display: block;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float linear infinite;
+        }
+
+        /* Luxus Galerie */
+        .gallery-section {
+            padding: 8rem 5vw;
+            background: var(--dark);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            height: 450px;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-overlay p {
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .view-btn {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .view-btn i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+
+        .view-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Parallax Sektion */
+        .parallax-section {
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: url('https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 5vw;
+        }
+
+        .parallax-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Animationen */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomEffect {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.8rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: rgba(10, 5, 20, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .nav-cta {
+                margin: 2rem 0 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 700px;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        .luxury-footer {
+            background: linear-gradient(135deg, #0a0514, #1a1030);
+            color: var(--light);
+            padding: 5rem 5vw 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .luxury-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-column {
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-column h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+            position: relative;
+        }
+
+        .footer-column p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent);
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .payment-methods i {
+            font-size: 1.8rem;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .payment-methods i:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Premium Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <i class="fas fa-gem"></i>
+            LUXE CRISTAL
+        </a>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Kollektion</a></li>
+            <li><a href="#">Über uns</a></li>
+            <li><a href="#">Galerie</a></li>
+            <li><a href="#">Kontakt</a></li>
+            <li><a href="#" class="nav-cta">Exklusiv</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Luxus Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="particles" id="particles-js"></div>
+        <div class="hero-content">
+            <h1>Die Kunst kristalliner Perfektion</h1>
+            <p>Entdecken Sie unsere exklusive Kollektion seltener Kristalle, handverlesen und präsentiert in
+                atemberaubendem Design.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn btn-primary">Kollektions</a>
+                <a href="#" class="btn btn-secondary">Privatführung</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Gallery Section -->
+    <section class="gallery-section">
+        <div class="section-header">
+            <h2>Unsere Meisterwerke</h2>
+            <p>Jeder Kristall in unserer Kollektion erzählt eine einzigartige Geschichte geologischer Wunder und
+                handwerklicher Perfektion.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+                    alt="Amethyst" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Violette Amethyst</h3>
+                    <p>Seltene Qualität aus den Tiefen Brasiliens</p>
+                    <a href="#" class="view-btn">Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+                    alt="Rosenquarz" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Rosenquarz</h3>
+                    <p>Zart wie die Blüten des Frühlings</p>
+                    <a href="#" class="view-btn">Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+                    alt="Citrin" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Goldener Citrin</h3>
+                    <p>Sonnenverwöhnte Eleganz</p>
+                    <a href="#" class="view-btn">Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Section -->
+    <section class="parallax-section">
+        <div class="parallax-bg" data-parallax="scroll"></div>
+        <div class="parallax-content">
+            <h2>Handverlesene Raritäten</h2>
+            <p>Unsere Kristalle werden von Experten weltweit ausgewählt und unter strengsten Qualitätskriterien
+                ausgewählt.</p>
+            <a href="#" class="btn btn-primary">Zertifizierungen</a>
+        </div>
+    </section>
+    <!-- Fügen Sie diesen Code VOR dem schließenden </body>-Tag ein -->
+
+    <!-- Luxus Footer -->
+    <footer class="luxury-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>LUXE CRISTAL</h3>
+                <p>Die ultimative Destination für exquisite Kristalle und mineralische Meisterwerke.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Kollektions</a></li>
+                    <li><a href="#">Über uns</a></li>
+                    <li><a href="#">Galerie</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="#">AGB</a></li>
+                    <li><a href="#">Datenschutz</a></li>
+                    <li><a href="#">Impressum</a></li>
+                    <li><a href="#">Widerrufsrecht</a></li>
+                </ul> 
+            </div>
+
+            <div class="footer-column">
+                <h4>Kontakt</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> Duisburger Straße.154, 47166 Duisburg</li>
+                    <li><i class="fas fa-phone"></i> ‪+43 123 456 789‬</li>
+                    <li><i class="fas fa-envelope"></i> info@luxe-cristal.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 LUXE CRISTAL. Alle Rechte vorbehalten.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Partikel Animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const particlesContainer = document.getElementById('particles-js');
+            const particleCount = window.innerWidth < 768 ? 30 : 80;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                // Random properties
+                const size = Math.random() * 20 + 5;
+                const posX = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 15 + 10;
+                const opacity = Math.random() * 0.6 + 0.2;
+                const hue = Math.random() * 60 + 240;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.opacity = opacity;
+                particle.style.background = hsla(`${hue}, 80%, 70%, ${opacity}`);
+                particle.style.borderRadius = size > 15 ? '30%' : '50%';
+
+                particlesContainer.appendChild(particle);
+            }
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', function () {
+            const parallaxBg = document.querySelector('.parallax-bg');
+            const scrollPosition = window.pageYOffset;
+            parallaxBg.style.transform = translateY(`${scrollPosition * 0.5}px`);
+        });
+
+        // Lazy Loading für Bilder
+        document.addEventListener('DOMContentLoaded', function () {
+            const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+
+            if ('IntersectionObserver' in window) {
+                let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove('lazy');
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(function (lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
