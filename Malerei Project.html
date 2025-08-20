@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malerei</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e6b89c;
+            --gold: #d4af37;
+            --light: #f5f5f5;
+            --text: #333333;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Luxus Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 1rem 5%;
+            background: rgba(26, 26, 46, 0.98);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+            font-size: 2.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 1.2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 1.8rem;
+        }
+
+        /* Hero Section mit Animation */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--light);
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 1000px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 1.1s;
+            box-shadow: 0 5px 15px rgba(230, 184, 156, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(230, 184, 156, 0.4);
+            background: var(--gold);
+        }
+
+        /* Animierte Pinselstriche im Hintergrund */
+        .brush-stroke {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .stroke-1 {
+            top: 10%;
+            left: 5%;
+            width: 300px;
+            height: 100px;
+            background: var(--accent);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform: rotate(20deg);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .stroke-2 {
+            bottom: 15%;
+            right: 10%;
+            width: 250px;
+            height: 80px;
+            background: var(--gold);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform: rotate(-15deg);
+            animation: float 18s ease-in-out infinite 2s;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 5%;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .service-content p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 8rem 5%;
+            background: linear-gradient(to bottom, var(--light) 50%, var(--primary) 50%);
+        }
+
+        .portfolio-title {
+            color: white;
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.6s ease;
+        }
+
+        .portfolio-item.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            /* Zentriertes Hintergrundbild ohne Wiederholung */
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: all 0.5s ease;
+        }
+
+        /* Verschiedene Hintergrundbilder für Portfolio-Items */
+        .portfolio-item:nth-child(1) .portfolio-img {
+            background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+        }
+
+        .portfolio-item:nth-child(2) .portfolio-img {
+            background-image: url('https://c8.alamy.com/comp/KHDJCT/historical-facades-in-the-city-centre-of-the-city-of-detmold-KHDJCT.jpg');
+        }
+
+        .portfolio-item:nth-child(3) .portfolio-img {
+            background-image: url('https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(26, 26, 46, 0.9), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        /* Kontakt Section */
+        .contact {
+            padding: 8rem 5%;
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-details i {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: var(--light);
+            text-align: center;
+            padding: 3rem 5%;
+        }
+
+        .social-links {
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            color: var(--light);
+            font-size: 1.5rem;
+            line-height: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(20deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(20deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: var(--primary);
+                text-align: center;
+                clip-path: circle(0px at top right);
+                transition: all 0.6s ease-out;
+            }
+            
+            .nav-links.active {
+                clip-path: circle(1000px at top right);
+            }
+            
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .service-img {
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-paint-roller"></i>
+            Malerei
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Leistungen</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#about">Über uns</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+        <button class="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="brush-stroke stroke-1"></div>
+        <div class="brush-stroke stroke-2"></div>
+        <div class="hero-content">
+            <h1>Meisterhafte Malerkunst seit 1985</h1>
+            <p>Verwandeln Sie Ihre Räume mit unserer Expertise in wahre Kunstwerke</p>
+            <a href="#contact" class="btn">Kostenlose Beratung</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Unsere Leistungen</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-paint-roller"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Innenraumgestaltung</h3>
+                    <p>Professionelle Malerarbeiten für Ihr Zuhause mit hochwertigen Materialien und präziser Ausführung.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Fassadenrenovierung</h3>
+                    <p>Verleihen Sie Ihrem Haus neuen Glanz mit unseren wetterbeständigen und langlebigen Fassadenanstrichen.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Designerlackierungen</h3>
+                    <p>Exklusive Lackierungen und Effektbeschichtungen für einzigartige Oberflächen und atmosphärische Räume.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="section-title portfolio-title">Unsere Projekte</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-img"></div>
+                <div class="portfolio-overlay">
+                    <h3>Modernes Wohnzimmer</h3>
+                    <p>Elegante Farbgestaltung in San Francisco</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-img"></div>
+                <div class="portfolio-overlay">
+                    <h3>Historische Fassade</h3>
+                    <p>Denkmalschutzgerechte Sanierung in Berlin</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-img"></div>
+                <div class="portfolio-overlay">
+                    <h3>Designhotel</h3>
+                    <p>Luxuriöse Raumgestaltung in München</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Kontaktieren Sie uns</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Lassen Sie sich beraten</h3>
+                <ul class="contact-details">
+                    <li><i class="fas fa-map-marker-alt"></i> Hamborn, 47166 Duisburg</li>
+                    <li><i class="fas fa-phone"></i> +49 30 12345678</li>
+                    <li><i class="fas fa-envelope"></i> info@malerei.de</li>
+                    <li><i class="fas fa-clock"></i> Mo-Fr: 8:00-18:00 Uhr</li>
+                </ul>
+            </div>
+            <div class="contact-form">
+                <!-- Formularplatzhalter -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>&copy; 2025 Malerei. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script>
+        // Navigation Responsive Behavior
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navbar = document.querySelector('.navbar');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Animation für Service Cards und Portfolio Items
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .portfolio-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Smooth Scrolling für Navbar Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Schließe das Mobile-Menü, wenn es geöffnet ist
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
