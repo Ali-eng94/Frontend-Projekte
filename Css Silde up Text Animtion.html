@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Silde up Text Animtion</title>
+</head>
+<style>
+    body {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        padding-top: 200px;
+        background: url('https://i.ytimg.com/vi/Xv2dE5oWMNY/maxresdefault.jpg') center center no-repeat;
+        background-size: 100% 100%;
+    }
+    .loader {
+        display:flex;
+        justify-items: center;
+        align-content: center;
+        padding-top: 200px; 
+    }
+    p {
+        color: rgb(228, 139, 24);
+        font-size: 5rem;
+    }
+    .words {
+        position:static;
+        overflow: hidden;
+    }
+    .word {
+        display: block;
+        height: 100%;
+        padding-left: 6px;
+        line-height: 250px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        color: #a0db15;
+        animation: spin 4s infinite;
+    }
+    @keyframes spin {
+        10% {
+            transform: translateY(-102%);
+        }
+        25% {
+            transform: translateY(-100%);
+        }
+        35% {
+            transform: translateY(-202%);
+        }
+        50% {
+            transform: translateY(-200%);
+        }
+        60% {
+            transform: translateY(-302%);
+        }
+        75% {
+            transform: translateY(-300%);
+        }
+        85% {
+            transform: translateY(-402%);
+        }
+        100% {
+            transform: translateY(-400%);
+        }
+    }
+</style>
+<body>
+    <div class="card">
+        <div class="loader">
+            <p>I Love</p>
+            <div class="words">
+                <span class="word">Python</span>
+                <span class="word">Javascript</span>
+                <span class="word">PHP</span>
+                <span class="word">Java</span>
+                <span class="word">C++</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
