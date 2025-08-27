@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altersrechner</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0, 0.15);
+            width: 500px;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+
+        h3 {
+            color: #1e293b;
+            margin: 0;
+            font-size: 28px;
+        }
+
+        #dob {
+            width: 18rem;
+            height: 3.5rem;
+            border-radius: 10px;
+            border: 2px solid #cbd5e1;
+            padding: 0 15px;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+
+        #dob:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .result {
+            font-size: 22px;
+            color: #1e293b;
+            background-color: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .highlight {
+            color: #3b82f6;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h3>Altersrechner</h3>
+        <input type="date" id="dob" onchange="calculateAge()">
+        <div class="result" id="result">Wählen Sie Ihr Geburtsdatum aus</div>
+        <div class="footer">Geben Sie Ihr Geburtsdatum ein, um Ihr aktuelles Alter zu berechnen</div>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const dobInput = document.getElementById("dob").value;
+            
+           
+            if (!dobInput) {
+                document.getElementById("result").textContent = "Bitte wählen Sie ein gültiges Datum aus";
+                return;
+            }
+            
+            const dob = new Date(dobInput);
+            const now = new Date();
+
+            
+            if (dob > now) {
+                document.getElementById("result").textContent = "Das Geburtsdatum kann nicht in der Zukunft liegen!";
+                return;
+            }
+
+            
+            let years = now.getFullYear() - dob.getFullYear();
+            let months = now.getMonth() - dob.getMonth();
+            let days = now.getDate() - dob.getDate();
+
+            
+            if (days < 0) {
+                months--;
+                
+                const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            
+            document.getElementById("result").innerHTML = 
+                `Ihr Alter: <span class="highlight">${years}</span> Jahre, <span class="highlight">${months}</span> Monate und <span class="highlight">${days}</span> Tage`;
+        }
+    </script>
+</body>
+</html>
+
