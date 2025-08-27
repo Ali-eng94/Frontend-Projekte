@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scroll Animtion</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        background: url('https://www.codehim.com/wp-content/uploads/2023/10/Infinite-Scrolling-Animation-CSS.png') center center no-repeat;
+        background-size: 100% 100%;
+    }
+
+    section {
+        margin-top: 800px;
+        height: 1000px;
+        width: 1000px;
+    }
+
+    /* From Uiverse.io by PriyanshuGupta28 */
+    .marquee {
+        overflow: hidden;
+        /* hide the scrolling overflow */
+        width: 100%;
+        -webkit-mask-image: linear-gradient(to right,
+                transparent 0%,
+                black 10%,
+                black 90%,
+                transparent 100%);
+        mask-image: linear-gradient(to right,
+                transparent 0%,
+                black 10%,
+                black 90%,
+                transparent 100%);
+    }
+    .marquee__inner {
+        display: flex;
+        width: max-content;
+        animation: marquee 15s linear infinite;
+    }
+
+    .marquee__group {
+        display: flex;
+    }
+
+    .marquee__group span {
+        margin: 0 1.5rem;
+        white-space: nowrap;
+        background: #000000;
+        color: white;
+        padding: 4px 16px 4px 12px;
+        border-radius: 6px;
+        font-size: 1.2rem;
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+</style>
+
+<body>
+    <section>
+        <!-- From Uiverse.io by PriyanshuGupta28 -->
+        <div class="marquee">
+            <div class="marquee__inner">
+                <div class="marquee__group">
+                    <span><img src="https://tse2.mm.bing.net/th/id/OIP.JFsKT_a94GZNW5XFVCxFXQHaEK?pid=Api&h=180"
+                            alt=""></span>
+                    <span><img src="https://tse1.mm.bing.net/th/id/OIP.bPNB_BfCGaBr3IRZDCB5DQHaFN?pid=Api&h=180"
+                            alt=""></span>
+                    <span><img src="https://tse2.mm.bing.net/th/id/OIP.cR9ZA0XmqAg9pKCRZdQ59QHaDt?pid=Api&h=180"
+                            alt=""></span>
+                    <span><img src="https://tse2.mm.bing.net/th/id/OIP.NvGPg6NfWQ1R3ooiDavaRgHaEw?pid=Api&h=180"
+                            alt=""></span>
+                    <span><img src="https://tse2.mm.bing.net/th/id/OIP.9tLI0lEfgX_knJMJfh48bwHaEK?pid=Api&h=180"
+                            alt=""></span>
+                </div>
+
+                <div class="marquee__group">
+                    <span><img src="https://tse4.mm.bing.net/th/id/OIP.0dfQoVeiPORS7to052nNgQHaEL?pid=Api&P=0&h=180"
+                            alt=""></span>
+                    <span><img src="https://tse2.mm.bing.net/th/id/OIP.9LDhjIxayn7yr_AdQ0yLIwHaEK?pid=Api&P=0&h=180"
+                            alt=""></span>
+                    <span><img src="https://tse4.mm.bing.net/th/id/OIP.58_SeJZOcXQSJDH-by_TfAHaFj?pid=Api&P=0&h=180"
+                            alt=""></span>
+                    <span><img src="https://tse4.mm.bing.net/th/id/OIP.3tBNQeYY5oPTgZiuQn0sswHaEK?pid=Api&P=0&h=180"
+                            alt=""></span>
+                    <span><img src="https://tse2.mm.bing.net/th/id/OIP.MAjgDVL3EAnZs3uPDWUxQQHaE8?pid=Api&h=180"
+                            alt=""></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
