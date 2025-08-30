@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Simple Image Preview</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .upload-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+        
+        .upload-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .upload-area {
+            border: 3px dashed #3498db;
+            border-radius: 15px;
+            padding: 40px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 25px;
+        }
+        
+        .upload-area:hover {
+            background-color: #f8f9fa;
+            border-color: #2980b9;
+        }
+        
+        .upload-icon {
+            font-size: 60px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .upload-text {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .upload-button {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .upload-button:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #2573a7 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(52, 152, 219, 0.6);
+        }
+        
+        #file-input {
+            display: none;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .gallery-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            border-radius: 2px;
+        }
+        
+        .image-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-info {
+            padding: 15px;
+        }
+        
+        .image-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .image-size {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(231, 76, 60, 0.9);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .image-card:hover .delete-btn {
+            opacity: 1;
+        }
+        
+        .empty-gallery {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            grid-column: 1 / -1;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .upload-container {
+                padding: 25px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .upload-text {
+                font-size: 1rem;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Elegante Bildvorschau</h1>
+            <p class="subtitle">Laden Sie Ihre Bilder hoch und sehen Sie sie in einer wunderschönen Galerie</p>
+        </header>
+        
+        <div class="upload-container">
+            <div class="upload-area" id="upload-area">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <p class="upload-text">Ziehen Sie Ihre Bilder hierher oder klicken Sie, um sie auszuwählen</p>
+                <button class="upload-button">Bilder auswählen</button>
+                <input type="file" id="file-input" multiple accept="image/*">
+            </div>
+            <p>Unterstützte Formate: JPG, PNG, GIF, WEBP</p>
+        </div>
+        
+        <h2 class="gallery-title">Ihre Bildergalerie</h2>
+        <div class="gallery-container" id="gallery-container">
+            <div class="empty-gallery">
+                <i class="fas fa-images" style="font-size: 50px; margin-bottom: 15px; color: #bdc3c7;"></i>
+                <p>Noch keine Bilder hochgeladen. Laden Sie jetzt welche hoch!</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Ali Haji <i class="fas fa-heart" style="color: #e74c3c;"></i></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('file-input');
+            const uploadArea = document.getElementById('upload-area');
+            const galleryContainer = document.getElementById('gallery-container');
+            
+            // Event-Listener für den Upload-Bereich
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // Drag & Drop Funktionen
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#27ae60';
+                uploadArea.style.backgroundColor = '#f8f9fa';
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = '#3498db';
+                uploadArea.style.backgroundColor = '';
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#3498db';
+                uploadArea.style.backgroundColor = '';
+                
+                if (e.dataTransfer.files.length > 0) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFiles(fileInput.files);
+                }
+            });
+            
+            // Dateiinput ändert sich
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length > 0) {
+                    handleFiles(fileInput.files);
+                }
+            });
+            
+            // Funktion zum Verarbeiten der ausgewählten Dateien
+            function handleFiles(files) {
+                // Entferne die leere Galerie-Nachricht, falls vorhanden
+                const emptyGallery = document.querySelector('.empty-gallery');
+                if (emptyGallery) {
+                    emptyGallery.remove();
+                }
+                
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    // Überprüfe, ob es sich um ein Bild handelt
+                    if (!file.type.match('image.*')) {
+                        continue;
+                    }
+                    
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        // Erstelle eine Bildvorschau-Karte
+                        const imageCard = document.createElement('div');
+                        imageCard.className = 'image-card';
+                        
+                        // Bild erstellen
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'image-preview';
+                        img.alt = file.name;
+                        
+                        // Bildinformationen erstellen
+                        const imageInfo = document.createElement('div');
+                        imageInfo.className = 'image-info';
+                        
+                        const imageName = document.createElement('div');
+                        imageName.className = 'image-name';
+                        imageName.textContent = file.name;
+                        
+                        const imageSize = document.createElement('div');
+                        imageSize.className = 'image-size';
+                        imageSize.textContent = formatFileSize(file.size);
+                        
+                        // Löschen-Button erstellen
+                        const deleteBtn = document.createElement('div');
+                        deleteBtn.className = 'delete-btn';
+                        deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+                        deleteBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            imageCard.remove();
+                            
+                            // Wenn keine Bilder mehr vorhanden sind, zeige die leere Galerie-Nachricht an
+                            if (galleryContainer.children.length === 0) {
+                                const emptyGallery = document.createElement('div');
+                                emptyGallery.className = 'empty-gallery';
+                                emptyGallery.innerHTML = `
+                                    <i class="fas fa-images" style="font-size: 50px; margin-bottom: 15px; color: #bdc3c7;"></i>
+                                    <p>Noch keine Bilder hochgeladen. Laden Sie jetzt welche hoch!</p>
+                                `;
+                                galleryContainer.appendChild(emptyGallery);
+                            }
+                        });
+                        
+                        // Elemente zusammenfügen
+                        imageInfo.appendChild(imageName);
+                        imageInfo.appendChild(imageSize);
+                        
+                        imageCard.appendChild(img);
+                        imageCard.appendChild(imageInfo);
+                        imageCard.appendChild(deleteBtn);
+                        
+                        // Zur Galerie hinzufügen
+                        galleryContainer.appendChild(imageCard);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            }
+            
+            // Funktion zur Formatierung der Dateigröße
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+        });
+    </script>
+</body>
+</html>
