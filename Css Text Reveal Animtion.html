@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Text Reveal Animtion</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        background: url('https://s2.best-wallpaper.net/wallpaper/2560x1600/1810/Beautiful-winter-snow-trees-river-moon-dusk_2560x1600.jpg')center center no-repeat;
+    }
+    h1 {
+        overflow: hidden;
+        font-family:serif;
+        font-weight: 700;
+        font-size: 10rem;
+        
+    }
+    h1::before {
+        content: attr(data-list);
+        position: absolute;
+        left: -100%;
+        color: cyan;
+        white-space: nowrap;
+        animation: ali 6s forwards ;
+    }
+    @keyframes ali {
+        to {
+            left: 27%;
+        }
+    }
+</style>
+<body>
+    <h1 data-list="Animtion Ali">Animtion Ali</h1>
+</body>
+</html>
