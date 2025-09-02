@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .modal {
+        width: 500px;
+        height: 500px;
+    }
+</style>
+<body>
+    <div class="box">
+        <button popovertarget="modal">
+            Open modal
+        </button>
+        <div id="modal" popover="">
+            <h1>Modal Box</h1>
+            <p>This is content of our modal box</p>
+            <button popovertarget="modal">Close</button>
+        </div>
+    </div>
+</body>
+</html>
