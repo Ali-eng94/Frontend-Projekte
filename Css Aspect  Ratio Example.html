@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Aspect  Ratio Example</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    div {
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        background-color: inherit;
+        border-radius: 10px;
+        overflow: hidden;
+        resize: both;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    video {
+        width: 100%;
+        aspect-ratio: 16/9;
+
+    }
+</style>
+<body>
+    <div>
+        <video src="https://www.website-advisor.de/video/anime-schmetterling-480p.mp4" controls></video>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia totam eius necessitatibus et, inventore porro, voluptatum voluptate quam odio sapiente quos tempore officiis. Eum esse totam eos, blanditiis omnis tenetur.</p>
+    </div>
+</body>
+</html>
