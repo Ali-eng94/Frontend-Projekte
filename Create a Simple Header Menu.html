@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Simple Header Menu</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .menu {
+        list-style: none;
+        background: #000;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+        gap: 10px;
+        border-radius: 7px;
+        box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.088);
+    }
+    li {
+        background: red;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    .menu:hover :not(li:hover){
+        opacity: .2;
+    }
+
+</style>
+<body>
+    <ul class="menu">
+        <li>Home</li>
+        <li>Blog</li>
+        <li>About</li>
+        <li>contact</li>
+    </ul>
+</body>
+</html>
