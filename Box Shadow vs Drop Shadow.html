@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Shadow vs Drop Shadow</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        flex-direction: row;
+        gap: 70px;
+    }
+
+    .img-1{
+        width: 350px;
+        height: 350px;
+        box-shadow: 1px 1px 20px yellow;
+
+    }
+
+    .img-2 {
+        width: 350px;
+        height: 350px;
+        filter: drop-shadow(1px 1px 20px yellow);
+
+    }
+
+    img {
+        width: 100%;
+    }
+</style>
+
+<body>
+
+    <img src="https://static.vecteezy.com/system/resources/previews/058/171/057/non_2x/fresh-passion-fruits-displayed-in-a-rustic-wooden-box-on-a-clean-transparent-background-wooden-box-of-passion-fruitsisolated-on-transparent-background-free-png.png"
+        alt="" class="img-1">
+
+
+    <img src="https://static.vecteezy.com/system/resources/previews/058/171/057/non_2x/fresh-passion-fruits-displayed-in-a-rustic-wooden-box-on-a-clean-transparent-background-wooden-box-of-passion-fruitsisolated-on-transparent-background-free-png.png"
+        alt="" class="img-2">
+
+</body>
+
+</html>
