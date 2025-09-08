@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Toggle Navigation Menu Bar</title>
+</head>
+<style>
+    body {
+        display: grid;
+        place-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    #Menu {
+        list-style: none;
+        text-align: center;
+        color: white;
+        width: 300px;
+        position: relative;
+        border-radius: 20px;
+    }
+    li {
+        padding: 10px;
+        border: 1px solid gray;
+        width: 100%;
+        background-color: blue;
+       
+    }
+    li:hover {
+        background-color: aqua;
+    }
+</style>
+<body>
+    <div class="navbar">
+        <button onclick="Menu.hidden^=1"><img src="menubuttonofthreelines_79781.ico" alt=""></button>
+        <ul id="Menu" hidden>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+            <li>Blog</li>
+        </ul>
+    </div>
+</body>
+</html>
