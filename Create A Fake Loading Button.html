@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create A Fake Loading Button</title>
+</head>
+<style>
+    body {
+        display: grid;
+        place-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    button {
+        padding: 20px;
+        background-color: aqua;
+        font-size: larger;
+        width: 200px;
+    }
+</style>
+<body>
+    <button id="actionbutton">
+        Submit
+    </button>
+    <script>
+        const btn = document.getElementById("actionbutton");
+
+        btn.addEventListener("click", () => {
+            btn.innerText = 'Loading...';
+            setTimeout(() => {
+                btn.innerText = 'Done';
+                setTimeout(() => {
+                    btn.innerText = 'Submit';
+                },1000)
+            },2000);
+        })
+    </script>
+</body>
+</html>
