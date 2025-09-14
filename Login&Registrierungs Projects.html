@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registrierung</title>
+</head>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: url('https://services.meteored.com/img/article/winter-deutschland-fruehling-stum-wetterlage-1676624736269_1024.jpg') center center no-repeat;
+        background-size: 100% 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: gradientMove 8s ease infinite;
+    }
+
+    @keyframes gradientMove {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .container {
+        width: 100%;
+        max-width: 530px;
+    }
+
+    .login-register-wrapper {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+        background: blur(15px);
+        border-radius: 15px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        padding-top: 20px;
+    }
+
+    .nav-buttons button {
+        padding: 12px 24px;
+        margin: 0 10px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        color: #888;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+    }
+
+    .nav-buttons button.active {
+        color: #667eea;
+        border-bottom: 2px solid #667eea;
+    }
+
+    .form-group {
+        position: relative;
+        width: 200%;
+        height: 100%;
+        display: flex;
+        transition: all 0.5s ease;
+    }
+
+    .form {
+        width: 50%;
+        padding: 30px;
+        box-sizing: border-box;
+        opacity: 0;
+        position: absolute;
+        transition: all 0.5s ease;
+    }
+
+    #loginform {
+        left: 0;
+        opacity: 1;
+    }
+
+    #registerform {
+        left: 50%;
+    }
+
+    #forgot-panel {
+        left: 0;
+        top: -100%;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        background: white;
+        transition: all 0.5s ease;
+    }
+
+    #forgot-panel.show {
+        top: 0;
+        opacity: 1;
+    }
+
+    input {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+        border-color: #667eea;
+        outline: none;
+    }
+
+    .input-group {
+        position: relative;
+        margin: 20px 0;
+    }
+
+    .input-group input {
+        padding: 15px 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+
+    .input-group input:focus+label,
+    .input-group input:not(:placeholder-shown)+label {
+        top: 0;
+        font-size: 12px;
+        color: #667eea;
+    }
+
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    a {
+        color: #667eea;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #764ba2;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .login-register-wrapper {
+            height: auto;
+            min-height: 500px;
+        }
+
+        .form-group {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .form {
+            width: 100%;
+            position: relative;
+            left: 0 !important;
+            opacity: 1 !important;
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        #forgot-panel {
+            position: relative;
+            top: 0;
+            display: none;
+        }
+
+        #forgot-panel.show {
+            display: block;
+        }
+
+        .nav-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-buttons button {
+            margin: 5px 0;
+        }
+    }
+</style>
+
+<body>
+    <h1>Willkommen to my Login Project</h1>
+    <div class="container">
+        <div class="login-register-wrapper">
+            <div class="nav-buttons">
+                <button id="loginBtn" class="active">Login</button>
+                <button id="registerBtn">Registrieren</button>
+            </div>
+            <div class="form-group">
+                <form id="loginform" class="form">
+                    <h2>Willkommen zurück</h2>
+                    <input type="email" placeholder="E-Mail" required>
+                    <input type="password" placeholder="Passwort" required>
+                    <button type="submit">Einloggen</button>
+                    <a href="#" id="forgotLink">Passwort vergessen?</a>
+                </form>
+                <form id="registerform" class="form">
+                    <h2>Account erstellen</h2>
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="E-Mail" required>
+                    <input type="password" placeholder="Passwort" required>
+                    <input type="password" placeholder="Passwort bestätigen" required>
+                    <button type="submit">Registrieren</button>
+                </form>
+            </div>
+            <div id="forgot-panel" class="form">
+                <h2>Passwort zurücksetzen</h2>
+                <input type="email" placeholder="E-Mail" required>
+                <button type="submit">Link senden</button>
+                <a href="#" id="backToLogin">Zurück zum Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var loginForm = document.getElementById('loginform');
+        var registerForm = document.getElementById('registerform');
+        var forgotPanel = document.getElementById('forgot-panel');
+        var loginBtn = document.getElementById('loginBtn');
+        var registerBtn = document.getElementById('registerBtn');
+        var forgotLink = document.getElementById('forgotLink');
+        var backToLogin = document.getElementById('backToLogin');
+
+        // Für Register-Button
+        registerBtn.addEventListener('click', function () {
+            loginForm.style.opacity = "0";
+            setTimeout(function () {
+                loginForm.style.left = "-430px";
+                registerForm.style.left = "0";
+                registerForm.style.opacity = "1";
+            }, 50);
+            loginBtn.classList.remove('active');
+            registerBtn.classList.add('active');
+        });
+
+        // Für Login-Button
+        loginBtn.addEventListener('click', function () {
+            registerForm.style.opacity = "0";
+            setTimeout(function () {
+                registerForm.style.left = "430px";
+                loginForm.style.left = "0";
+                loginForm.style.opacity = "1";
+            }, 50);
+            registerBtn.classList.remove('active');
+            loginBtn.classList.add('active');
+        });
+
+        // Für "Passwort vergessen" Link
+        forgotLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            loginForm.style.opacity = "0";
+            setTimeout(function () {
+                loginForm.style.top = "-100%";
+                forgotPanel.classList.add('show');
+            }, 50);
+        });
+
+        // Für "Zurück zum Login" Link
+        backToLogin.addEventListener('click', function (e) {
+            e.preventDefault();
+            forgotPanel.classList.remove('show');
+            loginForm.style.top = "0";
+            loginForm.style.opacity = "1";
+        });
+
+        // Formularvalidierung und Submission (Beispiel)
+        document.querySelectorAll('.form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                // Hier Validierung und AJAX-Submission einfügen
+                alert('Formular submitted!');
+
+            });
+        });
+    });
+
+</script>
+
+</html>
