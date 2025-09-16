@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxus Notizen App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: gradientMove 8s ease infinite;
+        text-align: center;
+    }
+
+    @keyframes gradientMove {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+
+    header h1 {
+        color: #fff;
+        font-weight: 600;
+        font-size: 2.5rem;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-add {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-add:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .notes-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .note {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .note:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+    }
+
+    .note-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .note-title {
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: #333;
+        word-break: break-word;
+    }
+
+    .note-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .note-actions i {
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 5px;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+    }
+
+    .note-actions .fa-edit {
+        color: #4CAF50;
+    }
+
+    .note-actions .fa-trash {
+        color: #f44336;
+    }
+
+    .note-actions i:hover {
+        background: rgba(0, 0, 0, 0.1);
+        transform: scale(1.1);
+    }
+
+    .note-content {
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        word-break: break-word;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .note-content::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .note-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .note-content::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+    }
+
+    .note-content::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .popup-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .popup-container.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .popup-box {
+        background: #fff;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+
+    .popup-box header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .popup-box header p {
+        color: #fff;
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    .popup-box header .close-btn {
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .popup-box header .close-btn:hover {
+        transform: rotate(90deg);
+    }
+
+    .popup-box form {
+        padding: 25px;
+    }
+
+    .popup-box .row {
+        margin-bottom: 20px;
+    }
+
+    .popup-box .row label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #444;
+    }
+
+    .popup-box .row input,
+    .popup-box .row textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .popup-box .row input:focus,
+    .popup-box .row textarea:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+    }
+
+    .popup-box .row textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .popup-box form button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        border: none;
+        padding: 12px 0;
+        width: 100%;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .popup-box form button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .notes-container {
+            grid-template-columns: 1fr;
+        }
+
+        .popup-box {
+            width: 95%;
+        }
+    }
+</style>
+
+<body>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-sticky-note"></i> Notizen</h1>
+            <button id="addNoteBtn" class="btn-add"><i class="fas fa-plus"></i> Neue Notiz</button>
+        </header>
+
+        <div class="notes-container" id="notesContainer">
+            <!-- Notizen werden hier dynamisch eingefügt -->
+        </div>
+    </div>
+
+    <!-- Popup für das Hinzufügen/Bearbeiten von Notizen -->
+    <div class="popup-container" id="popupContainer">
+        <div class="popup-box">
+            <header>
+                <p>Notiz hinzufügen</p>
+                <i class="fas fa-times close-btn"></i>
+            </header>
+            <form id="noteForm">
+                <div class="row">
+                    <label for="noteTitle">Titel</label>
+                    <input type="text" id="noteTitle" spellcheck="false" required>
+                </div>
+                <div class="row">
+                    <label for="noteContent">Beschreibung</label>
+                    <textarea id="noteContent" spellcheck="false" required></textarea>
+                </div>
+                <button type="submit">Speichern</button>
+            </form>
+        </div>
+    </div>
+    <h1>Willcome to my Note App</h1>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const addNoteBtn = document.getElementById('addNoteBtn');
+        const popupContainer = document.getElementById('popupContainer');
+        const closeBtn = document.querySelector('.close-btn');
+        const noteForm = document.getElementById('noteForm');
+        const notesContainer = document.getElementById('notesContainer');
+
+        let notes = JSON.parse(localStorage.getItem('luxury-notes')) || [];
+        let isEditing = false;
+        let editId = null;
+
+        // Event-Listener für den "Neue Notiz"-Button
+        addNoteBtn.addEventListener('click', () => {
+            popupContainer.classList.add('show');
+            isEditing = false;
+            editId = null;
+            noteForm.reset();
+            document.querySelector('.popup-box header p').textContent = 'Notiz hinzufügen';
+            document.getElementById('noteTitle').focus();
+        });
+
+        // Event-Listener für den Schließen-Button
+        closeBtn.addEventListener('click', () => {
+            popupContainer.classList.remove('show');
+        });
+
+        // Event-Listener für das Formular
+        noteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('noteTitle').value.trim();
+            const content = document.getElementById('noteContent').value.trim();
+
+            if (title && content) {
+                const note = {
+                    id: isEditing ? editId : Date.now().toString(),
+                    title,
+                    content,
+                    date: new Date().toLocaleString('de-DE')
+                };
+
+                if (isEditing) {
+                    // Notiz bearbeiten
+                    const index = notes.findIndex(n => n.id === editId);
+                    if (index !== -1) {
+                        notes[index] = note;
+                    }
+                } else {
+                    // Neue Notiz hinzufügen
+                    notes.push(note);
+                }
+
+                // Notizen speichern und anzeigen
+                saveNotes();
+                displayNotes();
+
+                // Popup schließen und Formular zurücksetzen
+                popupContainer.classList.remove('show');
+                noteForm.reset();
+            }
+        });
+
+        // Notizen im localStorage speichern
+        function saveNotes() {
+            localStorage.setItem('luxury-notes', JSON.stringify(notes));
+        }
+
+        // Notizen anzeigen
+        function displayNotes() {
+            notesContainer.innerHTML = '';
+
+            if (notes.length === 0) {
+                notesContainer.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-sticky-note"></i>
+                    <p>Keine Notizen vorhanden</p>
+                </div>
+            `;
+                return;
+            }
+
+            notes.forEach(note => {
+                const noteElement = document.createElement('div');
+                noteElement.classList.add('note');
+                noteElement.innerHTML = `
+                <div class="note-header">
+                    <h3 class="note-title">${note.title}</h3>
+                    <div class="note-actions">
+                        <i class="fas fa-edit" data-id="${note.id}"></i>
+                        <i class="fas fa-trash" data-id="${note.id}"></i>
+                    </div>
+                </div>
+                <p class="note-content">${note.content}</p>
+                <div class="note-date">${note.date}</div>
+            `;
+                notesContainer.appendChild(noteElement);
+            });
+
+            // Event-Listener für Bearbeiten- und Löschen-Buttons
+            document.querySelectorAll('.note-actions .fa-edit').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.target.getAttribute('data-id');
+                    editNote(id);
+                });
+            });
+
+            document.querySelectorAll('.note-actions .fa-trash').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.target.getAttribute('data-id');
+                    deleteNote(id);
+                });
+            });
+        }
+
+        // Notiz bearbeiten
+        function editNote(id) {
+            const note = notes.find(n => n.id === id);
+            if (note) {
+                document.getElementById('noteTitle').value = note.title;
+                document.getElementById('noteContent').value = note.content;
+
+                isEditing = true;
+                editId = id;
+
+                popupContainer.classList.add('show');
+                document.querySelector('.popup-box header p').textContent = 'Notiz bearbeiten';
+                document.getElementById('noteTitle').focus();
+            }
+        }
+
+        // Notiz löschen
+        function deleteNote(id) {
+            if (confirm('Möchten Sie diese Notiz wirklich löschen?')) {
+                notes = notes.filter(note => note.id !== id);
+                saveNotes();
+                displayNotes();
+            }
+        }
+
+        // Initial Notizen anzeigen
+        displayNotes();
+    });
+
+</script>
+
+</html>
