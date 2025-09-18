@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <style>
+        /* Styling für die gesamte App */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background:url('https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/dcb747f5-e157-4197-9e40-502faeaab221/878641443/qr-code-reader-maker-app-screenshot.png') center center no-repeat;
+            background-size: 100% 100%;
+            padding: 0 15px;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #0B85FF;
+            padding: 25px 30px;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .scan-section {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        #reader {
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .upload-section {
+            padding: 20px;
+            border: 2px dashed #0B85FF;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-section:hover {
+            background: rgba(11, 133, 255, 0.05);
+        }
+        
+        .upload-section i {
+            font-size: 50px;
+            color: #0B85FF;
+            margin-bottom: 15px;
+        }
+        
+        .upload-section p {
+            color: #0B85FF;
+            font-size: 16px;
+        }
+        
+        .upload-section input {
+            display: none;
+        }
+        
+        .result-section {
+            padding: 20px;
+            display: none;
+        }
+        
+        .result-section.active {
+            display: block;
+        }
+        
+        .result-section textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: none;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn {
+            background: #0B85FF;
+            color: white;
+        }
+        
+        .copy-btn:hover {
+            background: #0066cc;
+        }
+        
+        .close-btn {
+            background: #f1f1f1;
+            color: #333;
+        }
+        
+        .close-btn:hover {
+            background: #e1e1e1;
+        }
+        
+        .scan-mode-buttons {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scan-mode-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: #f1f1f1;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .scan-mode-btn.active {
+            background: #0B85FF;
+            color: white;
+        }
+        
+        @media (max-width: 500px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <!-- Font Awesome für Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>QR Code Scanner</h1>
+        </div>
+        
+        <div class="scan-section">
+            <div class="scan-mode-buttons">
+                <button id="camera-mode-btn" class="scan-mode-btn active">Kamera</button>
+                <button id="upload-mode-btn" class="scan-mode-btn">Bild hochladen</button>
+            </div>
+            
+            <div id="reader"></div>
+            
+            <div id="upload-section" class="upload-section">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>QR Code Bild zum Scannen hochladen</p>
+                <input type="file" id="file-input" accept="image/*">
+            </div>
+        </div>
+        
+        <div id="result-section" class="result-section">
+            <textarea id="result-text" placeholder="Scan-Ergebnis erscheint hier..." readonly></textarea>
+            <div class="buttons">
+                <button class="copy-btn" id="copy-btn">Text kopieren</button>
+                <button class="close-btn" id="close-btn">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Html5Qrcode Bibliothek -->
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elemente auswählen
+            const cameraModeBtn = document.getElementById('camera-mode-btn');
+            const uploadModeBtn = document.getElementById('upload-mode-btn');
+            const readerDiv = document.getElementById('reader');
+            const uploadSection = document.getElementById('upload-section');
+            const fileInput = document.getElementById('file-input');
+            const resultSection = document.getElementById('result-section');
+            const resultText = document.getElementById('result-text');
+            const copyBtn = document.getElementById('copy-btn');
+            const closeBtn = document.getElementById('close-btn');
+            
+            let html5QrcodeScanner = null;
+            let currentMode = 'camera';
+            
+            // Scan-Modus wechseln
+            function switchMode(mode) {
+                currentMode = mode;
+                
+                if (mode === 'camera') {
+                    cameraModeBtn.classList.add('active');
+                    uploadModeBtn.classList.remove('active');
+                    readerDiv.style.display = 'block';
+                    uploadSection.style.display = 'none';
+                    initCameraScanner();
+                } else {
+                    cameraModeBtn.classList.remove('active');
+                    uploadModeBtn.classList.add('active');
+                    readerDiv.style.display = 'none';
+                    uploadSection.style.display = 'block';
+                    if (html5QrcodeScanner) {
+                        html5QrcodeScanner.clear().catch(error => {
+                            console.error("Fehler beim Beenden des Scanners: ", error);
+                        });
+                    }
+                }
+            }
+            
+            // Kamera-Scanner initialisieren [citation:1][citation:8]
+            function initCameraScanner() {
+                if (html5QrcodeScanner) {
+                    html5QrcodeScanner.clear().catch(error => {
+                        console.error("Fehler beim Beenden des Scanners: ", error);
+                    });
+                }
+                
+                html5QrcodeScanner = new Html5QrcodeScanner(
+                    "reader", 
+                    { 
+                        fps: 10, 
+                        qrbox: { width: 250, height: 250 },
+                        supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA]
+                    }, 
+                    false
+                );
+                
+                html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+            }
+            
+            // Erfolgreicher Scan
+            function onScanSuccess(decodedText, decodedResult) {
+                resultText.value = decodedText;
+                resultSection.classList.add('active');
+                
+                // Scanner nach erfolgreichem Scan anhalten
+                if (html5QrcodeScanner) {
+                    html5QrcodeScanner.clear().catch(error => {
+                        console.error("Fehler beim Beenden des Scanners: ", error);
+                    });
+                }
+            }
+            
+            // Scan-Fehler
+            function onScanFailure(error) {
+                // Fehler können ignoriert werden, da sie oft auftreten wenn nichts gescannt wird
+            }
+            
+            // Datei-Upload handling [citation:4]
+            fileInput.addEventListener('change', function(e) {
+                if (e.target.files.length === 0) {
+                    return;
+                }
+                
+                const file = e.target.files[0];
+                Html5Qrcode.getCameras().then(devices => {
+                    if (devices && devices.length) {
+                        const html5QrCode = new Html5Qrcode("reader");
+                        
+                        html5QrCode.scanFile(file, true)
+                            .then(decodedText => {
+                                resultText.value = decodedText;
+                                resultSection.classList.add('active');
+                            })
+                            .catch(err => {
+                                alert("Fehler beim Scannen der Datei: " + err);
+                            });
+                    }
+                }).catch(err => {
+                    alert("Kameras konnten nicht geladen werden: " + err);
+                });
+            });
+            
+            // Upload Bereich Click-Handler
+            uploadSection.addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            // Text kopieren
+            copyBtn.addEventListener('click', function() {
+                resultText.select();
+                document.execCommand('copy');
+                alert("Text kopiert!");
+            });
+            
+            // Ergebnisbereich schließen
+            closeBtn.addEventListener('click', function() {
+                resultSection.classList.remove('active');
+                if (currentMode === 'camera') {
+                    initCameraScanner();
+                }
+            });
+            
+            // Modus-Wechsel Event-Handler
+            cameraModeBtn.addEventListener('click', function() {
+                switchMode('camera');
+            });
+            
+            uploadModeBtn.addEventListener('click', function() {
+                switchMode('upload');
+            });
+            
+            // Initialisiere den Scanner
+            initCameraScanner();
+        });
+    </script>
+</body>
+</html>
