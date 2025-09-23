@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Select Box</title>
+</head>
+<style>
+    body {
+        display: grid;
+        place-content: center;
+        place-items: center;
+        height: 100vh;
+        width: 100%;
+    }
+    select, ::picker(select){
+        appearance: base-select;
+        width: 200px;
+        overflow: hidden;
+    }
+    select>option {
+        border: none;
+        background: #e8e8e8;
+        margin: .4rem 0;
+    }
+    option {
+        background: #c8c8c8;
+    }
+    h1 {
+        font-size: 4rem;
+        font-weight: bold;
+        background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: gradientMove 8s ease infinite;
+    }
+
+    @keyframes gradientMove {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+</style>
+<body>
+    <h1>Willcome to my Simple Style Select Box</h1>
+    <label for="fruits">Choose a fruit:</label>
+    <select name="fruits" id="fruits">
+        <option value="">-- Select a fruits</option>
+        <option value="Apple">Apple</option>
+        <option value="Banana">Banana</option>
+        <option value="Orange">Orange</option>
+        <option value="Mango">Mango</option>
+    </select>
+</body>
+</html>
