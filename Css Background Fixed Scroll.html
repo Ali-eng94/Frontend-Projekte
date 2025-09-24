@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Background Fixed Scroll</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+
+    /* FIXED BACKGROUND SECTIONS */
+    .fixed-bg {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+    }
+
+    .bg-1 {
+        background-image: url('https://picsum.photos/1920/1080?random=1');
+    }
+
+    .bg-2 {
+        background-image: url('https://picsum.photos/1920/1080?random=2');
+    }
+
+    .bg-3 {
+        background-image: url('https://picsum.photos/1920/1080?random=3');
+    }
+
+    /* SCROLL BACKGROUND SECTIONS */
+    .scroll-content {
+        padding: 80px 20px;
+        background-color: #f0f0f0;
+    }
+
+    .scroll-bg {
+        background-image: url('https://picsum.photos/800/600?random=4');
+        background-attachment: scroll;
+        background-repeat: repeat;
+        background-size: 300px;
+        padding: 60px 20px;
+        margin: 40px 0;
+        border-radius: 10px;
+    }
+
+    /* TEXT STYLES */
+    .content-box {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 40px;
+        border-radius: 10px;
+        max-width: 600px;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+</style>
+
+<body>
+    <!-- FIXED BACKGROUND SECTIONS -->
+    <section id="home" class="fixed-bg bg-1">
+        <div class="content-box">
+            <h1>Fixed Background Effekt</h1>
+            <p>Dieser Hintergrund bleibt beim Scrollen fixiert</p>
+        </div>
+    </section>
+
+    <!-- WEITERE FIXED SECTIONS -->
+    <section id="about" class="fixed-bg bg-2">
+        <div class="content-box">
+            <h1>Zweiter Fixed Bereich</h1>
+            <p>Noch ein fixed Background Beispiel</p>
+        </div>
+    </section>
+
+    <section id="services" class="fixed-bg bg-3">
+        <div class="content-box">
+            <h1>Dritter Fixed Bereich</h1>
+            <p>Letztes fixed Background Beispiel</p>
+        </div>
+    </section>
+</body>
+
+</html>
