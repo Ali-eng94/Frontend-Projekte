@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Typing Text Animtion</title>
+</head>
+<style>
+    body {
+        display: grid;
+        place-content: center;
+        place-items: center;
+        height: 100vh;
+        width: 100%;
+    }
+    h1 {
+        width: 30ch;
+        font-family: monospace;
+        margin: 160px 250px;
+        text-wrap: nowrap;
+        overflow: hidden;
+        font-size: 6rem;
+        animation: typing 2s steps(30) infinite;
+    }
+    @keyframes typing {
+        from {
+            width: 0ch;
+        }
+    }
+</style>
+<body>
+    <h1>This is Typing Animation</h1>
+</body>
+</html>
