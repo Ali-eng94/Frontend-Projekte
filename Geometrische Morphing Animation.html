@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometrische Morphing Animation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.7;
+            animation: move 20s infinite linear;
+        }
+        
+        /* Verschiedene Formen */
+        .circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .square {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 50px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+        }
+        
+        .diamond {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            transform: rotate(45deg);
+        }
+        
+        @keyframes move {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(calc(100vw - 100px), calc(100vh - 100px)) rotate(360deg);
+            }
+        }
+        
+        .content {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            z-index: 1;
+            max-width: 600px;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Geometrische Formen -->
+    <div class="shape circle" style="top: 10%; left: 5%; animation-duration: 25s;"></div>
+    <div class="shape square" style="top: 20%; left: 80%; animation-duration: 30s;"></div>
+    <div class="shape triangle" style="top: 60%; left: 10%; animation-duration: 35s;"></div>
+    <div class="shape diamond" style="top: 40%; left: 70%; animation-duration: 40s;"></div>
+    <div class="shape circle" style="top: 80%; left: 50%; animation-duration: 28s;"></div>
+    <div class="shape square" style="top: 30%; left: 30%; animation-duration: 32s;"></div>
+    <div class="shape triangle" style="top: 70%; left: 90%; animation-duration: 38s;"></div>
+    <div class="shape diamond" style="top: 15%; left: 60%; animation-duration: 42s;"></div>
+    
+    <div class="content">
+        <h1>Geometrische Morphing Animation</h1>
+        <p>Kombination aus morphing Gradient und verschiedenen geometrischen Formen, die sich über den Bildschirm bewegen.</p>
+    </div>
+</body>
+</html>
