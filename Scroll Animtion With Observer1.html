@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-Only Scroll Animationen</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1, h2 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        
+        .animated-element {
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px;
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+        
+        
+        .fade-in {
+            transform: translateY(50px);
+        }
+        
+        .fade-in-left {
+            transform: translateX(-100px);
+        }
+        
+        .fade-in-right {
+            transform: translateX(100px);
+        }
+        
+        .zoom-in {
+            transform: scale(0.8);
+        }
+        
+        .rotate-in {
+            transform: rotate(-10deg) scale(0.9);
+        }
+        
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-10deg) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+        }
+        
+        
+        .scroll-animation {
+            animation-timeline: view();
+            animation-range: entry 0% cover 40%;
+        }
+        
+        .fade-up {
+            animation: fadeInUp linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+        
+        .fade-left {
+            animation: fadeInLeft linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+        
+        .fade-right {
+            animation: fadeInRight linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+        
+        .zoom {
+            animation: zoomIn linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 40%;
+        }
+        
+        .rotate {
+            animation: rotateIn linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 40%;
+        }
+        
+        
+        .css-fallback {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        
+        .section-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .section-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .section-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .section-4 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+        
+        .section-5 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        
+        
+        nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav li {
+            margin-left: 15px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #ff8a00, #e52e71);
+            width: 0%;
+            animation: progress linear;
+            animation-timeline: scroll();
+        }
+        
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        
+        
+        @media (max-width: 768px) {
+            .animated-element {
+                width: 95%;
+            }
+            
+            nav {
+                top: 10px;
+                right: 10px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+        }
+        
+        
+        @supports not (animation-timeline: view()) {
+            .scroll-animation, .fade-up, .fade-left, .fade-right, .zoom, .rotate {
+                opacity: 1;
+                transform: none;
+                animation: none;
+            }
+            
+            .progress-bar {
+                animation: none;
+                width: 100%; 
+            }
+            
+            
+            body::before {
+                content: "Hinweis: Dein Browser unterstützt nicht alle CSS-Scroll-Animationen. Die Animationen werden vereinfacht dargestellt.";
+                display: block;
+                background: #ffc107;
+                color: #333;
+                padding: 10px;
+                text-align: center;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+    
+    
+    <nav>
+        <ul>
+            <li><a href="#section1">Fade In</a></li>
+            <li><a href="#section2">Slide In</a></li>
+            <li><a href="#section3">Zoom In</a></li>
+            <li><a href="#section4">Rotate In</a></li>
+            <li><a href="#section5">Kombination</a></li>
+        </ul>
+    </nav>
+    
+    
+    <section id="section1" class="section-1">
+        <div class="container">
+            <h1 class="fade-up">Fade-In Animation (CSS-only)</h1>
+            <p class="fade-up">Elemente erscheinen von unten mit einem sanften Fade-In-Effekt - nur mit CSS!</p>
+            
+            <div class="animated-element fade-up">
+                <h2>Element 1</h2>
+                <p>Dieses Element wird von unten hereinschweben, sobald du zu diesem Abschnitt scrollst - komplett ohne JavaScript!</p>
+            </div>
+            
+            <div class="animated-element fade-up">
+                <h2>Element 2</h2>
+                <p>Jedes Element wird nacheinander erscheinen, wenn du weiter scrollst. Die Animation wird direkt durch CSS gesteuert.</p>
+            </div>
+            
+            <div class="animated-element fade-up">
+                <h2>Element 3</h2>
+                <p>Die Animation wird durch das Scrollen ausgelöst und ist sehr flüssig - dank CSS Scroll-Driven Animations.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="section2" class="section-2">
+        <div class="container">
+            <h1 class="fade-left">Slide-In Animationen</h1>
+            <p class="fade-right">Elemente kommen von links und rechts herein - nur mit CSS!</p>
+            
+            <div class="animated-element fade-left">
+                <h2>Von links</h2>
+                <p>Dieses Element kommt von der linken Seite herein. Alles wird durch CSS-Animationen gesteuert.</p>
+            </div>
+            
+            <div class="animated-element fade-right">
+                <h2>Von rechts</h2>
+                <p>Dieses Element kommt von der rechten Seite herein. Kein JavaScript notwendig!</p>
+            </div>
+            
+            <div class="animated-element fade-left">
+                <h2>Wieder von links</h2>
+                <p>Das Muster setzt sich mit diesem Element von links fort. Pure CSS-Magie!</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="section3" class="section-3">
+        <div class="container">
+            <h1 class="zoom">Zoom-In Animation</h1>
+            <p class="zoom">Elemente vergrößern sich beim Erscheinen - mit CSS Scroll-Animationen.</p>
+            
+            <div class="animated-element zoom">
+                <h2>Zoom-Effekt</h2>
+                <p>Dieses Element startet kleiner und zoomt auf seine volle Größe. Alles mit CSS!</p>
+            </div>
+            
+            <div class="animated-element zoom">
+                <h2>Noch ein Zoom</h2>
+                <p>Der Zoom-Effekt erzeugt eine dynamische Wirkung. Komplett ohne JavaScript.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="section4" class="section-4">
+        <div class="container">
+            <h1 class="rotate">Rotate-In Animation</h1>
+            <p class="rotate">Elemente drehen sich beim Erscheinen - nur mit CSS!</p>
+            
+            <div class="animated-element rotate">
+                <h2>Rotationseffekt</h2>
+                <p>Dieses Element dreht sich beim Erscheinen in den Viewport. Pure CSS-Animation.</p>
+            </div>
+            
+            <div class="animated-element rotate">
+                <h2>Weitere Rotation</h2>
+                <p>Die Drehung verleiht der Seite mehr Lebendigkeit. Alles ohne JavaScript.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="section5" class="section-5">
+        <div class="container">
+            <h1 class="fade-up">Kombinierte Animationen</h1>
+            <p class="fade-up">Verschiedene Animationen in einem Abschnitt - nur mit CSS!</p>
+            
+            <div class="animated-element fade-left">
+                <h2>Von links</h2>
+                <p>Dieses Element kommt von links. Gesteuert durch CSS Scroll-Animationen.</p>
+            </div>
+            
+            <div class="animated-element fade-right">
+                <h2>Von rechts</h2>
+                <p>Dieses Element kommt von rechts. Keine Zeile JavaScript im Code!</p>
+            </div>
+            
+            <div class="animated-element zoom">
+                <h2>Zoom</h2>
+                <p>Dieses Element zoomt herein. Alles mit modernen CSS-Techniken.</p>
+            </div>
+            
+            <div class="animated-element rotate">
+                <h2>Rotation</h2>
+                <p>Dieses Element dreht sich herein. Pure CSS-Lösung für Scroll-Animationen.</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <section style="background: #333; color: white;">
+        <div class="container">
+            <h1>Wie funktionieren diese Animationen?</h1>
+            <p>Diese Seite verwendet <strong>CSS Scroll-Driven Animations</strong> - eine neue CSS-Spezifikation, die es ermöglicht, Animationen direkt mit dem Scrollfortschritt zu verknüpfen.</p>
+            
+            <div class="animated-element fade-up">
+                <h2>Vorteile von CSS-Only Animationen</h2>
+                <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                    <li>Kein JavaScript notwendig</li>
+                    <li>Bessere Performance</li>
+                    <li>Glattere Animationen</li>
+                    <li>Einfachere Wartung</li>
+                    <li>Nativ vom Browser gerendert</li>
+                </ul>
+            </div>
+            
+            <div class="animated-element fade-up">
+                <h2>Browser-Unterstützung</h2>
+                <p>CSS Scroll-Driven Animations werden von modernen Browsern unterstützt (Chrome, Edge, Safari). Für ältere Browser gibt es einen Fallback.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
