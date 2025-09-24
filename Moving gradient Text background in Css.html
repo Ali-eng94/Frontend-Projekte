@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,31 +15,36 @@
         text-align: center;
         background: url('https://s2.best-wallpaper.net/wallpaper/2560x1600/1810/Beautiful-winter-snow-trees-river-moon-dusk_2560x1600.jpg')center center no-repeat;
     }
-        .gradient-text {
-            font-size: 9rem;
-            font-weight: bold;
-            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientMove 8s ease infinite;
+
+    .gradient-text {
+        font-size: 9rem;
+        font-weight: bold;
+        background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: gradientMove 8s ease infinite;
+    }
+
+    @keyframes gradientMove {
+        0% {
+            background-position: 0% 50%;
         }
 
-        @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        50% {
+            background-position: 100% 50%;
         }
-    </style>
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
 </head>
+
 <body>
     <h1 class="gradient-text">I'am Web Developer</h1>
 </body>
+
 </html>
