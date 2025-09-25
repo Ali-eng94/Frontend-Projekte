@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Button in Javascript</title>
+</head>
+<style>
+    body {
+        display: grid;
+        place-content: center;
+        place-items: center;
+        height: 100vh;
+        width: 100%;
+        gap: 30px;
+    }
+    input {
+        padding: 10px; 
+        border-radius: 10px;
+        width: 350px;
+    }
+</style>
+<body>
+    <input id="copyMe" value="https://github.com/Ali-eng94/Frontend-Projekte.git">
+    <button onclick="navigator.clipboard.writeText(copyMe.value);this.innerText= 'Copied!'">
+        Copy
+    </button>
+</body>
+</html>
+
