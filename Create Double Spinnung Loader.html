@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Double Spinnung Loader</title>
+</head>
+<style>
+    body {
+        display: grid;
+        place-content: center;
+        place-items: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .Double-Spinner {
+        width: 100px;
+        aspect-ratio: 1/1;
+        border: 5px solid transparent;
+        border-radius: 50%;
+        border-color: aqua transparent aqua transparent;
+        animation: spin .7s linear infinite;
+    }
+    @keyframes spin {
+
+        to {
+            transform: rotate(360deg);
+        }
+        
+    }
+</style>
+<body>
+    <div class="Double-Spinner"></div>
+</body>
+</html>
