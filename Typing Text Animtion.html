@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Text Animtion</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .typing {
+        color: #00ff99;
+        font-size: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid #00ff99;
+        width: 0;
+        animation: typing 4s steps(20,end) forwards infinite, blink 0.7s infinite;
+    }
+
+    @keyframes typing {
+
+        from {width: 0;}
+
+        to {width: 30ch;}
+    }
+    @keyframes blink {
+
+        50% {border-color: transparent;}
+    }
+</style>
+<body>
+    <div class="typing">Hello I'am Ali Haji Web Developer</div>
+</body>
+</html>
