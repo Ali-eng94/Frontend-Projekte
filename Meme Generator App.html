@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #212121;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-element {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-element:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+
+        .text-input {
+            background-color: #f7f7f7;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #generateMeme {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #generateMeme:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        #downloadMeme {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #downloadMeme:hover {
+            background-color: #1e7e34;
+            transform: translateY(-2px);
+        }
+
+        #resetMeme {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        #resetMeme:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .preview {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #memeCanvas {
+            max-width: 100%;
+            border: 2px solid #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .instructions {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+            
+            .controls, .preview {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Meme Generator</h1>
+        <p class="description">Erstelle deine eigenen Memes in Sekunden! Lade ein Bild hoch, füge Texte hinzu und teile es mit der Welt.</p>
+        
+        <div class="app-container">
+            <div class="controls">
+                <input type="file" id="imageUpload" accept="image/*" class="form-element">
+                
+                <input type="text" id="topText" placeholder="Oberer Text (z.B. 'Wenn du denkst...')" class="form-element text-input">
+                <input type="text" id="bottomText" placeholder="Unterer Text (z.B. '...aber eigentlich')" class="form-element text-input">
+                
+                <div class="button-group">
+                    <button id="generateMeme">Meme Erstellen</button>
+                    <button id="downloadMeme">Download</button>
+                    <button id="resetMeme">Zurücksetzen</button>
+                </div>
+            </div>
+            
+            <div class="preview">
+                <canvas id="memeCanvas"></canvas>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>So funktioniert's:</h3>
+            <ol>
+                <li>Lade ein Bild von deinem Computer hoch (JPG, PNG, etc.)</li>
+                <li>Gib den oberen und unteren Text für dein Meme ein</li>
+                <li>Klicke auf "Meme Erstellen", um eine Vorschau zu sehen</li>
+                <li>Passe bei Bedarf die Texte an und klicke erneut auf "Meme Erstellen"</li>
+                <li>Klicke auf "Download", um dein Meme zu speichern</li>
+            </ol>
+        </div>
+        
+        <div class="footer">
+            <p>Erstellt mit HTML, CSS und JavaScript | Ali Haji | Meme Generator © 2025</p>
+        </div>
+    </div>
+
+    <script>
+        // Canvas und Kontext initialisieren
+        const canvas = document.getElementById('memeCanvas');
+        const ctx = canvas.getContext('2d');
+        const imageUpload = document.getElementById('imageUpload');
+        const topTextInput = document.getElementById('topText');
+        const bottomTextInput = document.getElementById('bottomText');
+        const generateMemeBtn = document.getElementById('generateMeme');
+        const downloadMemeBtn = document.getElementById('downloadMeme');
+        const resetMemeBtn = document.getElementById('resetMeme');
+
+        let uploadedImage = null;
+
+        // Bild-Upload verarbeiten
+        imageUpload.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    uploadedImage = img;
+                    
+                    // Canvas-Größe an Bild anpassen (maximale Größe begrenzen)
+                    const maxWidth = 500;
+                    const maxHeight = 500;
+                    
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    if (width > maxWidth) {
+                        height = (maxWidth / width) * height;
+                        width = maxWidth;
+                    }
+                    
+                    if (height > maxHeight) {
+                        width = (maxHeight / height) * width;
+                        height = maxHeight;
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    
+                    drawMeme();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Bild und Text auf Canvas zeichnen
+        function drawMeme() {
+            if (!uploadedImage) {
+                // Standard-Nachricht anzeigen, wenn kein Bild hochgeladen wurde
+                ctx.fillStyle = '#f0f0f0';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#999';
+                ctx.font = '20px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Lade ein Bild hoch, um zu beginnen', canvas.width / 2, canvas.height / 2);
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);
+
+            // Text-Stil
+            const fontSize = Math.max(canvas.width * 0.07, 20); // Responsive Schriftgröße
+            ctx.font = `bold ${fontSize}px Impact, Arial, sans-serif`;
+            ctx.fillStyle = 'white';
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = Math.max(fontSize / 20, 2);
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+
+            // Oberen Text zeichnen
+            const topText = topTextInput.value;
+            if (topText) {
+                // Text mit Umriss zeichnen
+                ctx.fillText(topText, canvas.width / 2, fontSize/2);
+                ctx.strokeText(topText, canvas.width / 2, fontSize/2);
+            }
+
+            // Unteren Text zeichnen
+            ctx.textBaseline = 'bottom';
+            const bottomText = bottomTextInput.value;
+            if (bottomText) {
+                ctx.fillText(bottomText, canvas.width / 2, canvas.height - fontSize/2);
+                ctx.strokeText(bottomText, canvas.width / 2, canvas.height - fontSize/2);
+            }
+        }
+
+        // Meme erstellen Button Event
+        generateMemeBtn.addEventListener('click', drawMeme);
+
+        // Meme herunterladen Button Event
+        downloadMemeBtn.addEventListener('click', function() {
+            if (!uploadedImage) {
+                alert('Bitte lade zuerst ein Bild hoch.');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = 'mein-meme.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+
+        // Zurücksetzen Button Event
+        resetMemeBtn.addEventListener('click', function() {
+            imageUpload.value = '';
+            topTextInput.value = '';
+            bottomTextInput.value = '';
+            uploadedImage = null;
+            
+            // Canvas zurücksetzen
+            canvas.width = 500;
+            canvas.height = 400;
+            drawMeme();
+        });
+
+        // Initiale Zeichnung beim Laden der Seite
+        canvas.width = 500;
+        canvas.height = 400;
+        drawMeme();
+    </script>
+</body>
+</html>
