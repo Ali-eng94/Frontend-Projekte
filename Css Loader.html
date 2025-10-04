@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Loader</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        background-color: #212121;
+    }
+    div {
+        width: 6rem;
+        height: 6rem;
+        background-color: white;
+        animation: fliip 1s infinite;
+    }
+
+    @keyframes fliip {
+        from {
+            transform: perspective(100px);
+        }
+
+        to {
+            transform: perspective(100px) rotateX(360deg)
+        }
+    }
+
+
+</style>
+<body>
+    <div></div>
+</body>
+</html>
