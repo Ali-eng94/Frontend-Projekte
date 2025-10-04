@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Click Heart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f6f7fb;
+        }
+        .container {
+            position: relative;
+            height: 720px;
+            width: 820px;
+            background: url('your-image.jpg') center/cover no-repeat;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 40px;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+        }
+        .heart.active {
+            animation: animate 0.8s linear forwards;
+        }
+        @keyframes animate {
+            30% { font-size: 80px; opacity: 1; }
+            50% { opacity: 1; font-size: 60px; }
+            70% { font-size: 70px; }
+            80% { font-size: 60px; opacity: 1; }
+            90% { font-size: 60px; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>click Double </h1>
+        <i class="fa-solid fa-heart heart">Double Click</i>
+    </div>
+
+    <script>
+        const container = document.querySelector(".container"),
+              heart = document.querySelector(".heart");
+
+        container.addEventListener("dblclick", (e) => {
+            let xValue = e.clientX - e.target.getBoundingClientRect().left,
+                yValue = e.clientY - e.target.getBoundingClientRect().top;
+
+            heart.style.left = `${xValue}px`;
+            heart.style.top = `${yValue}px`;
+
+            heart.classList.add("active");
+            setTimeout(() => {
+                heart.classList.remove("active");
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
