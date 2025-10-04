@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Loader Animtion</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        background-color: #212121;
+        
+    }
+    .neon-loader {
+        position: relative;
+        overflow: hidden;
+        width: 300px;
+        height: 10px;
+        border: 1px solid gray;
+        border-radius: 10px;
+    }
+    .neon-loader::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 40%;
+        border-radius: 10px;
+        background: linear-gradient(90deg,transparent,#ff4081,#00bcd4);
+        box-shadow: 0 0 10px #ff4081,
+                    0 0 20px #00bcd4;
+        animation: neon 1.5s ease-in-out infinite;
+    }
+    @keyframes neon {
+        0% {
+            left: -40%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+</style>
+<body>
+    <div class="neon-loader"></div>
+</body>
+</html>
