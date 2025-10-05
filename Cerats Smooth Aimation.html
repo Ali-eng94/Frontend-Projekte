@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerats Smooth Aimation</title>
+</head>
+<style>
+    html {
+        scroll-snap-type: y  mandatory;
+    }
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .section {
+        height: 100vh;
+        width: 100vh;
+        scroll-snap-align: start;
+        display: grid;
+        place-items: center;
+    }
+    #Section-1 {
+        background-color: aqua;
+    }
+    #Section-2 {
+        background-color: rgb(57, 231, 22);
+    }
+    #Section-3 {
+        background-color: rgb(219, 233, 22);
+    }
+    #Section-4 {
+        background-color: rgb(230, 91, 27);
+    }
+    #Section-5 {
+        background-color: rgb(216, 19, 216);
+    }
+</style>
+<body>
+    <section class="section" id="Section-1">Section 1</section>
+    <section class="section" id="Section-2">Section 2</section>
+    <section class="section" id="Section-3">Section 3</section>
+    <section class="section" id="Section-4">Section 4</section>
+    <section class="section" id="Section-5">Section 5</section>
+</body>
+</html>
