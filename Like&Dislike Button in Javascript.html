@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=+, initial-scale=1.0">
+    <title>Like&Dislike Button in Javascript</title>
+</head>
+<style> 
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    #btn {
+        padding: 20px 50px 20px 50px;
+        font-size: 30px;
+    }
+</style>
+<body>
+    <button id="btn">Like</button>
+</body>
+<script>
+    const likeBtn = document.getElementById('btn');
+
+    const likeButton = () => {
+        likeBtn.addEventListener('click', () => {
+            if(likeBtn.innerText == 'Like'){
+                likeBtn.innerText = 'Liked';
+                likeBtn.style.backgroundColor = 'blue';
+                likeBtn.style.color = 'white';
+            }else {
+                likeBtn.innerText = "Like";
+                likeBtn.style.backgroundColor = 'white';
+                likeBtn.style.color = 'black';
+            }
+        })
+    }
+    likeButton();
+</script>
+</html>
