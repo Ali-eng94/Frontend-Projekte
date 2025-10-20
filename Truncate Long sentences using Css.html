@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truncate Long sentences using Css</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .box {
+        width: 200px;
+        padding: 3px 15px;
+        border-radius: 12px;
+        border: 2px solid rgb(58, 189, 255);
+        resize: horizontal;
+        overflow: hidden;
+    }
+    .text {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+</style>
+<body>
+    <div class="box">
+        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos cum assumenda a quibusdam expedita, eligendi excepturi commodi beatae, vel nihil qui ab odit explicabo aliquid tempore quis pariatur. Ex, iste?</p>
+    </div>
+</body>
+</html>
