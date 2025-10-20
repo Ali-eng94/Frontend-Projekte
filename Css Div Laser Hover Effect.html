@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Div Laser Hover Effect</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        background-color: #212121;
+    }
+    .laser {
+        position: relative;
+        overflow: hidden;
+        border: 0;
+        outline: none;
+        border-radius: 7px;
+        padding: 12px 15px;
+        cursor: pointer;
+        width: 400px;
+        height: 400px;
+        display: grid;
+        place-items: center;
+        color: white;
+        border: 1px solid white;
+
+    }
+    .laser::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,transparent,aqua,transparent);
+    }
+    .laser:hover:before {
+        animation: swipe 0.7s linear infinite;
+    }
+    @keyframes swipe {
+        to {
+            left: 100%;
+        }
+    }
+
+</style>
+<body>
+    <div class="laser">
+        <p>laser Swipe</p>
+    </div>
+</body>
+</html>
