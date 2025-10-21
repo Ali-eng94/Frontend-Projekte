@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookNook - Your Digital Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cbc;
+            --accent: #ff7e5f;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* Featured Books */
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-cover {
+            height: 250px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 4rem;
+        }
+
+        .book-info {
+            padding: 15px;
+        }
+
+        .book-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .book-author {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .book-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .add-to-cart {
+            background: var(--accent);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .category {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Reading Section */
+        .reading-section {
+            background: white;
+            padding: 50px 0;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .reading-section h2 {
+            margin-bottom: 30px;
+        }
+
+        .reader {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            text-align: left;
+        }
+
+        .reader-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .reader-content {
+            line-height: 1.8;
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .reader-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <span>BookNook</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Browse</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">My Library</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Sign In</button>
+                    <button class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Discover Your Next Favorite Book</h1>
+            <p>Explore thousands of e-books across all genres. Read anytime, anywhere on any device.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for books, authors, or categories...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Books -->
+    <section class="container">
+        <h2 class="section-title">Featured Books</h2>
+        <div class="books-grid">
+            <!-- Book 1 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="book-info">
+                    <div class="book-title">The Silent Patient</div>
+                    <div class="book-author">Alex Michaelides</div>
+                    <div class="book-price">
+                        <span class="price">$12.99</span>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 2 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="book-info">
+                    <div class="book-title">Where the Crawdads Sing</div>
+                    <div class="book-author">Delia Owens</div>
+                    <div class="book-price">
+                        <span class="price">$14.99</span>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 3 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="book-info">
+                    <div class="book-title">The Midnight Library</div>
+                    <div class="book-author">Matt Haig</div>
+                    <div class="book-price">
+                        <span class="price">$13.49</span>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 4 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="book-info">
+                    <div class="book-title">Atomic Habits</div>
+                    <div class="book-author">James Clear</div>
+                    <div class="book-price">
+                        <span class="price">$11.99</span>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 5 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="book-info">
+                    <div class="book-title">Project Hail Mary</div>
+                    <div class="book-author">Andy Weir</div>
+                    <div class="book-price">
+                        <span class="price">$15.99</span>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 6 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="book-info">
+                    <div class="book-title">The Four Winds</div>
+                    <div class="book-author">Kristin Hannah</div>
+                    <div class="book-price">
+                        <span class="price">$12.49</span>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="container">
+        <h2 class="section-title">Popular Categories</h2>
+        <div class="categories">
+            <div class="category">Fiction</div>
+            <div class="category">Mystery</div>
+            <div class="category">Science Fiction</div>
+            <div class="category">Biography</div>
+            <div class="category">Self-Help</div>
+            <div class="category">Romance</div>
+            <div class="category">Business</div>
+            <div class="category">History</div>
+        </div>
+    </section>
+
+    <!-- Reading Section -->
+    <section class="reading-section">
+        <div class="container">
+            <h2 class="section-title">Start Reading Now</h2>
+            <div class="reader">
+                <div class="reader-controls">
+                    <button class="btn btn-outline"><i class="fas fa-font"></i> Font</button>
+                    <button class="btn btn-outline"><i class="fas fa-moon"></i> Dark Mode</button>
+                    <button class="btn btn-outline"><i class="fas fa-bookmark"></i> Bookmark</button>
+                </div>
+                <div class="reader-content">
+                    <h3>Chapter 1: The Beginning</h3>
+                    <p>It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.</p>
+                    <p>The hallway smelt of boiled cabbage and old rag mats. At one end of it a coloured poster, too large for indoor display, had been tacked to the wall. It depicted simply an enormous face, more than a metre wide: the face of a man of about forty-five, with a heavy black moustache and ruggedly handsome features.</p>
+                    <p>Winston made for the stairs. It was no use trying the lift. Even at the best of times it was seldom working, and at present the electric current was cut off during daylight hours. It was part of the economy drive in preparation for Hate Week. The flat was seven flights up, and Winston, who was thirty-nine and had a varicose ulcer above his right ankle, went slowly, resting several times on the way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BookNook</h3>
+                    <p>Your digital library for all your reading needs. Discover, read, and enjoy thousands of e-books.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Books</a></li>
+                        <li><a href="#">Authors</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Deals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Account</h3>
+                    <ul>
+                        <li><a href="#">Sign In</a></li>
+                        <li><a href="#">Create Account</a></li>
+                        <li><a href="#">My Library</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Purchase History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 BookNook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add to cart functionality
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookTitle = this.closest('.book-card').querySelector('.book-title').textContent;
+                    alert(`"${bookTitle}" has been added to your cart!`);
+                });
+            });
+            
+            // Category selection
+            const categories = document.querySelectorAll('.category');
+            categories.forEach(category => {
+                category.addEventListener('click', function() {
+                    categories.forEach(c => c.style.background = 'white');
+                    categories.forEach(c => c.style.color = 'var(--dark)');
+                    this.style.background = 'var(--primary)';
+                    this.style.color = 'white';
+                });
+            });
+            
+            // Search functionality
+            const searchButton = document.querySelector('.search-bar button');
+            searchButton.addEventListener('click', function() {
+                const searchTerm = document.querySelector('.search-bar input').value;
+                if (searchTerm.trim() !== '') {
+                    alert(`Searching for: "${searchTerm}"`);
+                } else {
+                    alert('Please enter a search term');
+                }
+            });
+            
+            // Reader controls
+            const readerControls = document.querySelectorAll('.reader-controls .btn');
+            readerControls.forEach(control => {
+                control.addEventListener('click', function() {
+                    const controlName = this.querySelector('i').className.split(' ')[1];
+                    alert(`${controlName} feature would be implemented here`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
