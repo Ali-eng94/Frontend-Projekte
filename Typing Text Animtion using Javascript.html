@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Text Animtion using Javascript</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    #text {
+        font-size: 3rem;
+        padding: 100px;
+    }
+</style>
+<body>
+    <h1 id="text"></h1>
+
+    <script>
+        const words = [
+                        "Master HTML, CSS & JavaScript.",
+                        "Get daily CSS tips Tricks.",
+                        "Discover frontend effects.",
+                        "Level up your coding skills!"
+                    ];
+
+        i = 0, j = 0, del = false;
+
+        function type(){
+            text.textContent = words[i].slice(0, del ? --j : ++j)
+
+            if (!del && j == words[i].length)
+            return setTimeout(() => del = true, 300, type());
+            
+            if (del && j == 0)
+            del = false, i = (i + 1) % words.length;
+            
+            setTimeout(type, 80);
+
+        }
+        type();
+    </script>
+</body>
+</html>
