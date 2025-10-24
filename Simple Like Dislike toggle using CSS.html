@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Like Dislike toggle using CSS</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    input {
+        display: none;
+    }
+    label {
+        font-size: 10rem;
+        color: #aaa;
+        cursor: pointer;
+        transition: color 0.3s ease, transform 0.1s ease;
+    }
+    input:checked+label {
+        color: #ff3b5c;
+        transform: scale(1.1);
+    }
+    input:active {
+        transform: scale(.9);
+    }
+</style>
+<body>
+    <input type="checkbox" id="heart">
+    <label for="heart">&#10084;</label>
+</body>
+</html>
