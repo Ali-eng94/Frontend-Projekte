@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Hamburger Menu using CSS</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .menu {
+        width: 60px;
+        cursor: pointer;
+    }
+    .menu div {
+        height: 3px;
+        background: #000;
+        margin: 5px 0;
+        transition: .4s;
+    }
+    .menu:hover div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu:hover div:nth-child(2) {
+        opacity: 0;
+    }
+    .menu:hover div:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+</style>
+<body>
+    <div class="menu">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
