@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protfolio like Text Animtion using Css</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    h1 {
+        font-size: 6rem;
+        font-weight: 700;
+    }
+    .title span::after {
+        content: 'Web Developer';
+        animation: words 6s infinite;
+    }
+    @keyframes words {
+        0%, 33% {
+            content: 'Web Devloper';
+            color: #00ff7f;
+        }
+        34%, 66% {
+            content: 'Create Designer';
+            color: #ff00ff;
+        }
+        67%, 100% {
+            content: 'Digital Creator';
+            color: #ffd700;
+        }
+    }
+</style> 
+<body>
+    <div class="warpper">
+        <h1 class="title">I am Ali a 
+            <span>
+                
+            </span>
+        </h1>
+    </div>
+</body>
+</html>
