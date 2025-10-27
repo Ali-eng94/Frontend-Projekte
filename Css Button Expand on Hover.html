@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Button Expand on Hover</title>
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .msg-btn {
+        background-color: #e8e8e8;
+        border-radius: 50px;
+        width: 60px;
+        height: 60px;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .msg-btn .icon {
+        font-size: 30px;
+        transition: all 0.4s ease;
+        position: absolute;
+        opacity: 1;
+    }
+    .msg-btn .text {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.4s ease;
+    }
+     .msg-btn:hover {
+        background-color: #27b1fb;
+        width: 200px;
+        box-shadow: 0 6px 20px rgba(24, 119, 242, .45);
+        
+    }
+    .msg-btn:hover .icon {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    .msg-btn:hover .text {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+<body>
+    <button class="msg-btn">
+        <span class="icon">&#9993;</span>
+        <span class="text">MESSAGE</span>
+    </button>
+</body>
+</html>
