@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Rotation </title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        flex-direction: column;
+    }
+    .container {
+        border: 10px solid #09096c;
+        padding: 20px;
+        perspective: 400px;
+    }
+    .image {
+        max-width: 500px;
+        width: 100%;
+        cursor: pointer;
+        transition: 300ms;
+    }
+    img {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        object-fit: cover;
+    }
+    .image:hover {
+        transform: rotateY(50deg);
+    }
+</style>
+<body>
+    <h1>Hover Me</h1>
+    <div class="container">
+        <div class="image">
+        <img src="https://www.cantaloop.de/wp-content/uploads/2022/02/schriftskulptur.jpg" alt="">
+        </div>
+    </div>
+</body>
+</html>
