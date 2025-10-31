@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Tooltips in Css</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .tooltips {
+        position: relative;
+        display: inline-block;
+        border: 0;
+        outline: none;
+        background: blue;
+        color: #fff;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    .tooltips-text {
+        width: 100%;
+        position: absolute;
+        bottom: 110%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #000;
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .tooltips:hover .tooltips-text {
+        visibility: visible;
+        opacity: 1;
+    }    
+</style>
+<body>
+    <button class="tooltips">Hover Me
+        <span class="tooltips-text">Tooltips Text</span>
+    </button>
+    
+</body>
+</html>
