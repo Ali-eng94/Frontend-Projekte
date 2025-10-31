@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increase Font Size Dynamically</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        flex-direction: column;
+        gap: 30px;
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <h1>Text</h1>
+    </div>
+    <input type="range" id="slider" min="10" max="100" value="16">
+</body>
+<script>
+    const RangeSlider = document.getElementById('slider');
+    const heading = document.querySelector('h1');
+    
+    heading.style.fontSize = RangeSlider.value + 'px'
+
+    RangeSlider.addEventListener('input', () => {
+        heading.style.fontSize = RangeSlider.value + 'px'
+    })
+</script>
+</html>
