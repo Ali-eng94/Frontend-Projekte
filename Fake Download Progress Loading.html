@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Download Progress Loading</title>
+</head>
+<style>
+    body {
+        display: grid;
+        place-content: center;
+        place-items: center;
+        height: 100vh;
+        width: 100%;
+    }
+    #downloadBtn {
+        background-color: blue;
+        color: #fff;
+        padding: 10px;
+        border-radius: 10px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 10px;
+    }
+    .Progress-circle {
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid #fff;
+        border-radius: 50%;
+        animation: spin 0.9s linear infinite;
+        display: none;
+    }
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<body>
+    <button id="downloadBtn" onclick="startDownload()">
+        <span id="text">Download</span>
+        <span class="Progress-circle" id="loader"></span>
+    </button>
+</body>
+<script>
+    function startDownload() {
+        let btn = document.getElementById("downloadBtn");
+        let text = document.getElementById("text");
+        let loader = document.getElementById("loader");
+
+        btn.disabled = true;
+        loader.style.display = "inline-block";
+
+        let Progress = 0;
+
+        let fakeDownload = setInterval(() => {
+            Progress++;
+            text.textContent = `Downloading ${Progress}%`;
+
+            if (Progress >= 100) {
+                clearInterval(fakeDownload);
+                loader.style.display = 'none';
+                text.textContent = 'Downloaded';
+                btn.style.backgroundColor ='#28a745';
+            }
+        },40)
+    }
+</script>
+</html>
