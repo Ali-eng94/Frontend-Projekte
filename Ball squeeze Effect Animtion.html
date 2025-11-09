@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball squeeze Effect Animtion</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        display: grid;
+        place-items: center;
+        place-content: center;
+        height: 100%;
+        width: 100%;
+        background: #202020;
+    }
+    .wrapper {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .circle {
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgb(81, 255, 0);
+        animation: circle .7s alternate infinite ease;
+    }
+
+    @keyframes circle {
+        0% {
+            top: 300px;
+            height: 5px;
+            border-radius: 50px 50px 25px 25px;
+            transform: scaleX(1.7);
+        }
+
+        15% {
+            height: 20px;
+            border-radius: 50%;
+            transform: scaleX(1);
+        }
+
+        100% {
+            top: 0%;
+
+        }
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="circle"></div>
+    </div>
+</body>
+
+</html>
