@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Scrolling in Css</title>
+</head>
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        margin: 0;
+        font-family: Arial,sans-serif;
+    }
+    section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+    }
+    #section1 {
+        background-color: #219ebc;
+    }
+    #section2 {
+        background-color: #f4a261;
+    }
+    #section3 {
+        background-color: #6a0572;
+    }
+    nav {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 8px 12px;
+        border-radius: 5px;
+    }
+    nav a:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+</style>
+<body>
+    <nav>
+        <a href="#section1">Section 1</a>
+        <a href="#section2">Section 2</a>
+        <a href="#section3">Section 3</a>
+    </nav>
+    <section id="section1">
+        <p>This is Section 1</p>
+    </section>
+    <section id="section2">
+        <p>This is Section 2</p>
+    </section>
+    <section id="section3">
+        <p>This is Section 3</p>
+    </section>
+</body>
+</html>
