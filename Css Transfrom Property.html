@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Transfrom Property</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 100px;
+        text-align: center;
+        background: url('https://s2.best-wallpaper.net/wallpaper/2560x1600/1810/Beautiful-winter-snow-trees-river-moon-dusk_2560x1600.jpg')center center no-repeat;
+    }
+    #text {
+        font-size: 6rem;
+    }
+    .transform {
+        width: 350px;
+        height: 350px;
+        border: 2px solid white;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    #translate:hover {
+        transform: translate(-10px,-20px);
+        transition: 0.5s ease;
+    }
+    #rotate:hover {
+        transform: rotate(30deg);
+        transition: 0.5s ease-in;
+    }
+    #skew:hover {
+        transform: skew(-10deg,-10deg);
+        transition: 0.5s ease-in;
+    }
+    #scale:hover {
+        transform: scale(0.8);
+        transition: 0.5s ease-in;
+    }
+    #matrix:hover {
+        transform: matrix(0,1,1,0,0,0);
+        transition: 0.5s ease-in;
+    }
+</style>
+<body>
+    <h1 id="text">Willcome to Css Transform Hover Effects</h1>
+    <h1></h1>
+    <div class="transform" id="translate">
+        <p>Hover Me</p>
+        <h1>translate</h1>
+    </div>
+    <div class="transform" id="rotate">
+        <p>Hover Me</p>
+        <h1>rotate</h1>
+    </div>
+    <div class="transform" id="skew">
+        <p>Hover Me</p>
+        <h1>rotateX</h1>
+    </div>
+    <div class="transform" id="scale">
+        <p>Hover Me</p>
+        <h1>rotateY</h1>
+    </div>
+    <div class="transform" id="matrix">
+        <p>Hover Me</p>
+        <h1>scaleX</h1>
+    </div>
+</body>
+</html>
