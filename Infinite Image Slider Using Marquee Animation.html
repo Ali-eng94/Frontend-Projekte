@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Image Slider Using Marquee Animation</title>
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #e8e8e8;
+        margin: 0;
+    }
+
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70%;
+        height: 300px;
+        overflow: hidden;
+        background: #fff;
+        border-radius: 15px;
+        padding: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    marquee {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 40px 0;
+    }
+
+    .images {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        will-change: transform;
+    }
+
+    .images img {
+        width: 260px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        transform-origin: center center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .images img:hover {
+        transform: scale(1.15);
+        z-index: 10;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    }
+</style>
+
+<body>
+
+    <div class="wrapper">
+        <marquee id="slider" direction="left" scrollamount="14">
+            <div class="images" id="imgBox">
+                <img decoding="async"
+                    src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8a29zdGVubG9zZSUyMGJpbGRlcnxlbnwwfHwwfHx8MA%3D%3D"
+                    alt="" class="img">
+                <img decoding="async"
+                    src="https://cdn.pixabay.com/photo/2023/09/21/14/17/italy-8266783_1280.jpg"
+                    alt="" class="img">
+                <img decoding="async"
+                    src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-fall-nature-scenery-free-image.jpeg?w=600&quality=80"
+                    alt="" class="img">
+                <img decoding="async"
+                    src="https://images.all-free-download.com/images/thumbjpg/tree_meadow_nature_220408.jpg" alt=""
+                    class="img">
+            </div>
+        </marquee>
+    </div>
+
+</body>
+<script>
+    const marquee = document.getElementById("slider");
+    const imgBox = document.getElementById("imgBox");
+
+    // Function to duplicate images once
+    function duplicateImages() {
+        const allImgs = imgBox.querySelectorAll("img");
+        allImgs.forEach((img) => {
+            const clone = img.cloneNode(true);
+            imgBox.appendChild(clone);
+        });
+    }
+
+    // Reset duplicates to prevent DOM overload
+    function resetImages() {
+        const originalImages = Array.from(imgBox.querySelectorAll("img")).slice(0, 4); // first 4 are originals
+        imgBox.innerHTML = "";
+        originalImages.forEach((img) => imgBox.appendChild(img));
+        duplicateImages(); // duplicate again for smooth loop
+        setupHoverPause(); // reapply hover listeners
+    }
+
+    duplicateImages(); // initial duplication
+
+    // Duplicate every 4 seconds
+    const duplicationInterval = setInterval(duplicateImages, 4000);
+
+    // Reset every 30 seconds to prevent lag
+    setInterval(resetImages, 30000);
+
+    // Hover pause
+    function setupHoverPause() {
+        const images = document.querySelectorAll(".img");
+        images.forEach((img) => {
+            img.addEventListener("mouseover", () => marquee.stop());
+            img.addEventListener("mouseout", () => marquee.start());
+        });
+    }
+
+    setupHoverPause();
+
+    // Mutation observer to reapply hover pause for new images
+    const observer = new MutationObserver(setupHoverPause);
+    observer.observe(imgBox, { childList: true });
+</script>
+
+</html>
