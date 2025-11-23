@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Scrolling Website</title>
+</head>
+<style>
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body {
+    min-height: 110vh;
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+#logo {
+    font-size: 2em;
+    color: #fff;
+    user-select: none;
+    font-weight: 600;
+}
+.menu a {
+    font-size: 0.8em;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 20px;
+    letter-spacing: 1px;
+    padding: 6px 15px;
+    border-radius: 8px;
+    transition: 0.5s;
+}
+.menu a:hover,a.active {
+    color: #333;
+    background: #fff;
+}
+.parallax {
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 110vh;
+background: url('https://services.meteored.com/img/article/tolle-sternbilder-und-sternschnuppen-am-nachthimmel-1751201003336_1024.jpeg') no-repeat;
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+}
+#heading {
+    position: absolute;
+    top: 20%;
+    font-size: 6rem;
+    color: #fff;
+    text-shadow: 2px 4px 5px #232121;
+}
+.parallax img {
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+    top: 40%;
+}
+.parallax img#moon {
+    width: 1000px;
+    top: 20%;
+    right: 5%;
+}
+.parallax img#mountain {
+   position: fixed;
+   bottom: 0; 
+}
+section {
+    position: relative;
+    background-color: #020912;
+    padding: 30px 100px;
+}
+h2 {
+    color: #fff;
+    font-size: 3rem;
+    margin-bottom: 25px;
+}
+p {
+    color: #fff;
+    font-size: 3em;
+    font-weight: 300;
+}
+</style>
+<body>
+    <header>
+        <div id="logo">Ali Haji</div>
+        <div class="menu">
+            <a href="" class="active">Home</a>
+            <a href="">Blog</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+        </div>
+    </header>
+    <div class="parallax">
+        <h2 id="heading">Parallax Website</h2>
+        <img src="http://www.pngall.com/wp-content/uploads/2016/03/Full-Moon-PNG.png" alt="" id="moon">
+        <img src="https://www.freepnglogos.com/uploads/mountain-png/mountain-png-uplyft-creative-branding-design-development-fort-33.png" alt="" id="mountain">
+        
+    </div>
+
+    <section>
+        <h2>Parallax Scrolling Website</h2>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet inventore odio quos qui odit eius excepturi laudantium perferendis tenetur ut vero, laborum recusandae doloremque est, temporibus eaque distinctio laboriosam. Rerum enim dolorem, odio doloribus laudantium exercitationem inventore excepturi voluptatum. Voluptate libero perferendis temporibus ex velit error fugit corrupti distinctio, suscipit, officiis quam officia accusantium doloremque commodi corporis aperiam quia aliquid maxime, debitis accusamus architecto id. Ullam aliquid vitae in quia accusantium, soluta fugit corrupti nobis. A minus voluptates omnis ex error animi quaerat est nulla inventore, officia debitis architecto quo, quia reiciendis eligendi quidem perspiciatis cumque id dolorum eius nesciunt quasi qui asperiores. Temporibus culpa exercitationem saepe accusamus, laborum dolorem aspernatur, alias, et suscipit ducimus adipisci quidem eius quos iure!</p><br><br>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus eligendi tempore ratione itaque dicta, inventore, odit nobis laboriosam deserunt officiis modi sed totam, natus veritatis tempora voluptates. Ab, eum non?</p><br><br>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt quaerat a tempora porro delectus impedit distinctio voluptatem tenetur, perspiciatis maxime ratione exercitationem. Dolor eius ut qui molestias. Molestias, ad nemo.</p><br><br>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam assumenda fugiat ipsam adipisci impedit fuga, quisquam harum porro alias dignissimos, provident eligendi voluptates ullam quas consequatur earum in odit perferendis ea maiores optio! Expedita necessitatibus aut esse. Culpa consequuntur iste mollitia ea quia repellat illo quo possimus inventore fugiat reprehenderit nihil ipsa modi distinctio voluptas perferendis, rem tempore nulla hic incidunt amet explicabo fuga. Obcaecati inventore blanditiis possimus ut consectetur laborum maiores. Molestias itaque enim, accusamus perferendis ipsum placeat expedita unde ducimus, quidem nobis ratione? Odio adipisci iure laudantium quis animi explicabo et, enim nihil sit quasi suscipit amet eius repellendus laborum doloribus, nisi quibusdam? At rerum quam deleniti incidunt, autem culpa sint quod recusandae voluptates atque placeat, ipsum error voluptatibus eaque omnis nemo excepturi nesciunt porro corporis sequi quisquam a quibusdam. Nihil alias qui in earum officia ad tenetur hic culpa reiciendis praesentium? Illo, error. Voluptatem voluptatibus corporis laudantium facilis labore quia amet architecto accusamus libero debitis, corrupti, voluptas odio eligendi laboriosam quaerat suscipit quibusdam ex soluta beatae consequatur, vero porro enim delectus. Deserunt autem et suscipit, voluptatum eaque neque consequatur magnam numquam quod voluptas architecto dolorem dignissimos officia quae iusto reprehenderit optio mollitia eum perspiciatis asperiores! Itaque, veniam.</p><br><br>
+
+    </section>
+</body>
+<script>
+    const heading = document.getElementById("heading");
+    const moon =document.getElementById("moon")
+
+    window.addEventListener("scroll",() => {
+        let value = window.scrollY;
+
+        if (value <= 500) {
+            heading.style.marginTop = value * 2.5 +'px';
+            moon.style.right = 20 + value * 0.3 + '%';
+        }
+    })
+</script>
+</html>
