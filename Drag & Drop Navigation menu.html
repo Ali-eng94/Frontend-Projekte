@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Drag & Drop Navigation menu</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", serif;
+    }
+
+    html,
+    body {
+        display: grid;
+        height: 100%;
+        place-items: center;
+        background: linear-gradient(135deg, #c57eff, #b375ff, #ba6aff);
+    }
+
+    .container {
+        width: 400px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        background: linear-gradient(135deg, #bf8bff, #a66aff);
+        color: #fff;
+        font-weight: 500;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 10px;
+        cursor: grab;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    li:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+    }
+    #icon {
+        margin: 0px 15px;
+        font-size: 1.2rem;
+    }
+    .dragging {
+        border: 2px dashed #fff;
+        color: #edecec;
+        background: #0000007f;
+    }
+    .drop-target {
+        border: 2px dashed #fff;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <ul>
+            <li draggable="true">
+                <ion-icon id="icon" name="home-outline"></ion-icon>Home
+            </li>
+            <li draggable="true">
+                <ion-icon id="icon" name="logo-web-component"></ion-icon>Blog
+            </li>
+            <li draggable="true">
+                <ion-icon id="icon" name="code-working-outline"></ion-icon>Servies
+            </li>
+            <li draggable="true">
+                <ion-icon id="icon" name="information-circle-outline"></ion-icon>About
+            </li>
+            <li draggable="true">
+                <ion-icon id="icon" name="call-outline"></ion-icon>Contact
+            </li>
+            <li draggable="true">
+                <ion-icon id="icon" name="help-outline"></ion-icon>Help
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded',() => {
+        const items = document.querySelectorAll('li');
+        let draggedItem = null;
+
+        items.forEach(item => {
+            item.addEventListener('dragstart', () => {
+                draggedItem = item;
+                item.classList.add('dragging');
+            });
+            item.addEventListener('dragend', () => {
+                item.classList.remove('dragging');
+                document.querySelectorAll('.drop-target').forEach(el =>el.classList.remove('drop-target'));
+            })
+            item.addEventListener('dragover',(e) => {
+                e.preventDefault();
+                if(draggedItem !== item){
+                    item.classList.add('drop-target')
+                }
+            })
+            item.addEventListener('drop', () => {
+                if (draggedItem && draggedItem !== item) {
+                    let parent = item.parentNode;
+                    let next = item.nextSibling === draggedItem ? item : item.nextSibling;
+                    parent.insertBefore(draggedItem, next);
+                }
+            })
+        })
+    })
+</script>
+
+</html>
