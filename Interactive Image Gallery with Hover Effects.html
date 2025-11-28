@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery with Hover Effects</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    html, body {
+        display: grid;
+        height: 100%;
+        place-items:center;
+        background-color: #474747;
+        font-family: "Bebas Neue", sans-serif;
+    }
+    .wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        height: 400px;
+        gap: 10px;
+        font-weight: 400;
+        letter-spacing: 2px;
+    }
+    .wrapper>div {
+        flex: 0 0 120px;
+        border-radius: 0.5rem;
+        transition: 0.5s ease-in-out;
+        box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;    
+    }
+    .wrapper>div:nth-of-type(1) {
+        background: url("https://static.vecteezy.com/system/resources/previews/025/474/309/large_2x/portrait-of-a-professional-woman-in-a-suit-business-woman-standing-in-an-office-ai-generated-photo.jpg") no-repeat 50% / cover;
+    }
+    .wrapper>div:nth-of-type(2) {
+        background: url("https://i.pinimg.com/originals/34/b9/6d/34b96de96732d3a325293e58aed16083.jpg") no-repeat 50% / cover;
+    }
+    .wrapper>div:nth-of-type(3) {
+        background: url("https://t3.ftcdn.net/jpg/02/81/81/86/360_F_281818663_XXRCNuGktKeZsnknqWkKI0rR4JPWui3H.jpg") no-repeat 50% / cover;
+    }
+    .wrapper>div:nth-of-type(4) {
+        background: url("https://img.freepik.com/free-photo/pretty-young-woman-outdoor_624325-3094.jpg?semt=ais_hybrid&w=740&q=80") no-repeat 50% / cover;
+    }
+    .wrapper>div .content {
+        font-size: 1.5rem;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        flex-direction: column;
+        height: 100%;
+        justify-content: flex-end;
+        background: linear-gradient(0deg, rgba(2, 2, 46, 0.67) 0%, rgba(255, 255, 255, 0) 100%);
+        transform: translateY(100%);
+        transition: opacity 0.5s ease-in-out, transform 0.5s 0.2s;
+        visibility: hidden;
+        opacity: 0;
+    }
+    .wrapper>div .content span {
+        display: block;
+        margin-top: 5px;
+        font-size: 1.2rem;
+    }
+    .wrapper>div:hover {
+        flex: 0 0 350px;
+        transform: translateY(-30px);
+    }
+    .wrapper>div:hover .content {
+        opacity: 1;
+        transform: translateY(0%);
+        visibility: visible;
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <div>
+            <div class="content">
+                <h2>Jane Doe</h2>
+                <span>UI & UX Designer</span>
+            </div>
+        </div>
+        <div>
+            <div class="content">
+                <h2>Alex Smith</h2>
+                <span>CEO Expert</span>
+            </div>
+        </div>
+        <div>
+            <div class="content">
+                <h2>Emilly New</h2>
+                <span>Web Designer</span>
+            </div>
+        </div>
+        <div>
+            <div class="content">
+                <h2>Lisa Boley</h2>
+                <span>Marketing Coordinator</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
