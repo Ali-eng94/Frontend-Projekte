@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass morphism Wibsite using Html Css</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    html,
+    body {
+        background-color: #212121;
+    }
+
+    .container {
+        position: relative;
+        width: 1260px;
+        height: 580px;
+
+    }
+
+    .wrapper {
+        width: 860px;
+        height: 460px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #000;
+        border-radius: 20px;
+        box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.25), -10px -10px -25px rgba(0, 0, 0, 0.25);
+    }
+
+    .container .circle {
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: linear-gradient(to bottom, #ff3700, #171717);
+    }
+
+    .circle:nth-child(1) {
+        left: 150px;
+        bottom: 20px;
+    }
+
+    .circle:nth-child(2) {
+        right: 140px;
+        top: 20px;
+    }
+
+    .header {
+        width: 100%;
+        height: 40px;
+        margin-top: 20px;
+        border-bottom: 1px solid #ffffff49;
+        display: flex;
+        color: #fff;
+    }
+
+    .header .logo {
+        font-size: 20px;
+        font-weight: 600;
+        margin-left: 60px;
+        text-transform: uppercase;
+        margin-right: 40px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 1px;
+    }
+
+    .header .logo img {
+        margin-left: 10px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .header ul {
+        display: flex;
+        position: absolute;
+        right: 30px;
+    }
+
+    .header ul li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 7px 20px;
+        cursor: pointer;
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .header ul .btn {
+        background-color: #d400ff;
+        border-radius: 30px;
+    }
+
+    .section1 {
+        position: absolute;
+        top: 150px;
+        left: 70px;
+        color: #fff;
+        width: 330px;
+    }
+
+    .section1 h2 {
+        font-size: 34px;
+    }
+
+    .section1 span {
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+
+    .section1 p {
+        font-size: 10px;
+        font-weight: 300;
+        line-height: 20px;
+        letter-spacing: 1px;
+        color: #ffffffc8;
+    }
+
+    .collection {
+        display: flex;
+        width: 300px;
+        height: 70px;
+        margin-top: 15px;
+    }
+
+    .collection img {
+        width: 90px;
+        height: 80%;
+        padding: 10px;
+        cursor: pointer;
+        rotate: -20deg;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .collection img:hover {
+        transform: scale(1.1);
+    }
+
+    button {
+        border: 0;
+        outline: 0;
+        background: #ff0000;
+        color: #fff;
+        font-weight: 600;
+        font-size: 10px;
+        letter-spacing: 1px;
+        border-radius: 17px;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background 0.2s ease-in-out;
+    }
+
+    button:hover {
+        background-color: #ff0000;
+    }
+
+    .section2 {
+        position: absolute;
+        top: 100px;
+        right: 0;
+        width: 400px;
+    }
+
+    .section2 .outer-circle {
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 0, 0, 0.257);
+    }
+
+    .section2 .outer-circle .inner-circle {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: linear-gradient(to bottom, red), #ffffff17;
+    }
+
+    .inner-circle img {
+        width: 150%;
+        rotate: 30deg;
+        margin-left: -60px;
+        margin-top: -60px;
+        transition: all 0.5s ease-in-out;
+        cursor: pointer;
+    }
+
+    .inner-circle img:hover {
+        transform: scale(1.13);
+        rotate: -5deg;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="wrapper">
+            <div class="header">
+                <div class="logo">Nike <img src="pngwing.com.png" alt=""></div>
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                    <li class="btn">-30% off</li>
+                </ul>
+            </div>
+            <div class="section1">
+                <h2>NIKE SHOP</h2>
+                <span>Get Sport's Sneakers</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde fuga accusamus facere, repellat
+                    praesentium doloribus vero? Tempora sapiente non amet maxime, omnis architecto quo corrupti quaerat
+                    nesciunt! Repellat, vitae deleniti!</p>
+            
+                <div class="collection">
+                    <img src="pngwing.com (6).png" alt="">
+                    <img src="pngwing.com (5).png" alt="">
+                    <img src="pngwing.com (4).png" alt="">
+                </div>
+                <button>Order New</button>
+            </div>
+            <div class="section2">
+                <div class="outer-circle">
+                    <div class="inner-circle">
+                        <img src="pngwing.com (1).png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
