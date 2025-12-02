@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card After Effect on Hover</title>
+</head>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    html,
+    body {
+        display: grid;
+        height: 100%;
+        place-items: center;
+        background: #081b29;
+    }
+
+    .card {
+        position: relative;
+        width: 320px;
+        height: 440px;
+        border: 5px solid #2885fe;
+        overflow: hidden;
+        box-shadow: 5px 20px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+        width: 103%;
+        display: block;
+    }
+
+    .content {
+        width: 100%;
+        height: 0%;
+        background: linear-gradient(rgba(0, 0, 0, 0.6),#2885fe);
+        position: absolute;
+        overflow: hidden;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: #fff;
+        padding: 0 30px;
+        text-align: center;
+        transition: height 0.5s;
+    }
+
+    .content p {
+        letter-spacing: 1px;
+        font-size: 14px;
+    }
+
+    .content h3 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .social-icons {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .social-icons span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 40px;
+        background-color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        margin: 20px 10px;
+    }
+    .social-icons a {
+        font-size: 24px;
+        color: #000;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+    .card:hover .content {
+        height: 100%;
+    }
+</style>
+
+<body>
+    <div class="card">
+        <img src="http://cs315422.userapi.com/v315422720/20d6/3yCU1Too_IQ.jpg" alt="">
+        <div class="content">
+            <h3>It's Ali Haji</h3>
+            <p> We are here to provide you FREE wev development tutorials</p>
+            <div class="social-icons">
+                <span><a href=""><ion-icon name="logo-instagram"></ion-icon></a></span>
+                <span><a href=""><ion-icon name="logo-github"></ion-icon></a></span>
+                <span><a href=""><ion-icon name="logo-twitter"></ion-icon></a></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
