@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Responsive Naivgation Bar</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Poppins", sans-serif;
+        height: 97vh;
+        background: #f5f5f5;
+    }
+
+    .navbar-section {
+        position: relative;
+        width: 100%;
+        margin: 0 10rem;
+        height: 70vh;
+        border: 1px solid #000;
+        overflow: hidden;
+        background: rgba(218, 218, 235);
+    }
+
+    .navbar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        color: #fff;
+        background: purple;
+        box-shadow: rgba(0, 0, 0, 0.11) 0px 4px 10px;
+    }
+
+    .navbar-menu {
+        display: flex;
+        justify-content: flex-end;
+        margin: 0 1rem;
+    }
+
+    .navbar-item {
+        list-style: none;
+        margin: 0 1rem;
+    }
+
+    .logo {
+        margin: auto 1.3rem;
+        font-size: 1.5rem;
+
+    }
+
+    .navbar-item a {
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        padding: 1rem 1.3rem;
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+        transition: all .3s;
+    }
+
+    .navbar-item a:hover {
+        background: rgb(145, 1, 145);
+        border-radius: 7px;
+    }
+
+    .cross-icon {
+        display: none;
+    }
+
+    .toggle-menu {
+        width: 60px;
+        border-radius: 4px;
+        background: #fff;
+        margin: .6rem 1rem;
+        color: #000;
+        position: absolute;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+    }
+
+    .cross-icon, .bar-icon {
+        font-size: 2rem;
+        margin: 0 auto;
+    }
+
+    .contant {
+        padding: 2rem;
+    }
+
+    .contant h2 {
+        text-align: center;
+        letter-spacing: 1px;
+        font-size: 1.3rem;
+        margin: 1rem 0;
+    }
+
+    .contant p {
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    @media screen and (max-width:968px) {
+        .navbar-menu {
+            display: none;
+        }
+        .logo {
+            margin: .6rem 1.5rem;
+        }
+        .toggle-menu {
+            display: flex;
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            position: absolute;
+            top: 55px;
+            left: -17px;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform .3s;
+            z-index: 9999;
+            background: rgba(128, 0, 128, 0.751);
+            opacity: 0;
+        }
+        .mobile-menu {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .mobile-menu .navbar-item a {
+            padding: 1rem 2rem;
+        }
+        .mobile-menu .navbar-item {
+            border-bottom: 1px solid #000;
+            cursor: pointer;
+        }
+        .mobile-menu .navbar-item:hover {
+            background: rgb(146. 1, 146);
+        }
+    }
+</style>
+
+<body>
+    <div class="navbar-section">
+        <div class="navbar">
+            <div class="logo">
+                <h2>Ali Haji</h2>
+            </div>
+            <ul class="navbar-menu menu">
+                <li class="navbar-item"><a href="">Home</a></li>
+                <li class="navbar-item"><a href="">Docs</a></li>
+                <li class="navbar-item"><a href="">Services</a></li>
+                <li class="navbar-item"><a href="">About</a></li>
+                <li class="navbar-item"><a href="">Contact</a></li>
+            </ul>
+            <div class="toggle-menu">
+                <ion-icon class="bar-icon" name="menu-outline"></ion-icon>
+                <ion-icon class="cross-icon" name="close-outline"></ion-icon>
+            </div>
+        </div>
+        <div class="contant">
+            <h2>Web Heading</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci tempora iusto, ab fugit vitae ut
+                accusantium quas nemo dolore,
+                repellendus unde iure molestiae asperiores a eos aliquam cumque ex numquam. Accusamus eaque corrupti ea
+                vel perferendis possimus odit,
+                repellat ducimus, illum dolores excepturi tempore nemo dignissimos numquam eos neque sit necessitatibus
+                dolorum! Distinctio, blanditiis?
+                Recusandae, quae doloribus eum, provident fugiat dolores neque accusantium possimus ut minima tempora at
+                ullam! Deserunt rem pariatur nam
+                fugiat tenetur omnis officiis est expedita eius unde quo illum eveniet praesentium quae corrupti vero,
+                earum accusantium cum, natus,
+                corporis officia perspiciatis magni aut aliquam! Accusamus, iste.</p>
+        </div>
+    </div>
+</body>
+<script>
+    const navIcon = document.querySelector('.toggle-menu'),
+    barIcon = document.querySelector('.bar-icon'),
+    crossIcon = document.querySelector('.cross-icon'),
+    navMenu = document.querySelector('.navbar-menu');
+
+    navIcon.addEventListener('click', () => {
+        const isOpen= navMenu.classList.toggle('mobile-menu');
+
+        if(isOpen) {
+            barIcon.style.setProperty('display','none','important');
+            crossIcon.style.setProperty('display','block','important');
+        } else {
+            barIcon.style.setProperty('display','block','important');
+            crossIcon.style.setProperty('display','none','important');
+        }
+    })
+</script>
+</html>
