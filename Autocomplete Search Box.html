@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete Search Box</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html,
+        body {
+            display: grid;
+            height: 100%;
+            place-items: center;
+            background: #212121;
+        }
+
+        .wrapper {
+            position: relative;
+            width: 640px;
+            height: 70vh;
+            padding: 10px;
+            background: #292929;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+            border: 2px solid rgba(7, 7, 7, 0.12);
+            overflow: hidden;
+        }
+
+        .wrapper .autocomplete {
+            width: 100%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .wrapper .autocomplete input {
+            height: 50px;
+            width: 100%;
+            outline: none;
+            border: none;
+            color: rgb(228, 222, 222);
+            background-color: #2d2d2d;
+            padding: 0 15px;
+            letter-spacing: 1px;
+            border: 1px solid rgb(63, 63, 63);
+            border-radius: 10px;
+        }
+
+        a {
+            position: absolute;
+            top: 25px;
+            right: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #727272;
+            font-size: 18px;
+        }
+
+        .autocomplete-items {
+            width: 100%;
+            border-radius: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 5px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+            border: 1px solid rgba(7, 7, 7, 0.12);
+            z-index: 99;
+            position: absolute;
+            display: none;
+        }
+
+        .autocomplete-items div {
+            background-color: #2d2d2d;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 14px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #444;
+        }
+
+        .autocomplete-items div:last-child {
+            border-bottom: none;
+        }
+
+        .autocomplete-items div:hover {
+            background-color: #3a3a3a;
+        }
+
+        .autocomplete-active {
+            background-color: #5b5bf0 !important;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <form action="" autocomplete="off">
+            <div class="autocomplete">
+                <input type="text" id="myInput" placeholder="Search here..">
+                <a href="#">
+                    <ion-icon name="search-outline"></ion-icon>
+                </a>
+                <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    function autocomplete(inp, arr) {
+        var currentFocus;
+
+        inp.addEventListener("input", function (e) {
+            var val = this.value;
+            closeAllLists();
+
+            if (!val) {
+                return false;
+            }
+
+            currentFocus = -1;
+
+            var listContainer = document.createElement("DIV");
+            listContainer.setAttribute("id", "autocomplete-list");
+            listContainer.setAttribute("class", "autocomplete-items");
+            this.parentNode.appendChild(listContainer);
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    var item = document.createElement("DIV");
+                    item.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    item.innerHTML += arr[i].substr(val.length);
+                    item.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+
+                    item.addEventListener("click", function (e) {
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        closeAllLists();
+                    });
+
+                    listContainer.appendChild(item);
+                }
+            }
+
+            if (listContainer.children.length > 0) {
+                listContainer.style.display = "block";
+            }
+        });
+
+        inp.addEventListener("keydown", function (e) {
+            var x = document.getElementById("autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+
+            if (e.keyCode == 40) { // Down arrow
+                currentFocus++;
+                addActive(x);
+            } else if (e.keyCode == 38) { // Up arrow
+                currentFocus--;
+                addActive(x);
+            } else if (e.keyCode == 13) { // Enter
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+
+        function addActive(x) {
+            if (!x) return false;
+
+            removeActive(x);
+
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+
+        function removeActive(x) {
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+
+        function closeAllLists(elmnt) {
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+
+    var queries = [
+        "how to learn javascript in one day",
+        "how to create website without coding",
+        "how to become a hacker",
+        "can i create website without javascript",
+        "can i create website using python",
+        "can i hack nasa with html",
+        "what is html",
+        "what are basic rules of programming",
+        "what is difference between java and javascript",
+        "learn english in one day",
+        "learn coding for free",
+        "learn to python in one week",
+        "which is the best programming language",
+        "how to starting coding",
+        "best text editor for coding",
+        "best way to learn coding fast",
+        "best language for app development",
+        "how to create mobile app",
+        "which is best framework of javascript",
+        "which is best language for app development"
+    ];
+
+    autocomplete(document.getElementById("myInput"), queries);
+</script>
+
+</html>
