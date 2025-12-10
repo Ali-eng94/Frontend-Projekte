@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Cube Box</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        display: grid;
+        height: 100%;
+        place-items: center;
+        background: #0984e3;
+    }
+
+    .wrapper {
+        width: 200px;
+        height: 200px;
+    }
+    .box {
+        animation: animate 10s ease-in-out infinite;
+        transform-origin: 100px 100px 0;
+        transform-style: preserve-3d;
+    }
+    @keyframes animate {
+        from,to {
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        }
+        16% {
+            transform: rotateY(-90deg);
+        }
+        33% {
+            transform: rotateY(-90deg) rotateZ(90deg);
+        }
+        50% {
+            transform: rotateY(-180deg) rotateZ(90deg);
+        }
+        66% {
+            transform: rotateY(-270deg) rotateX(90deg);
+        }
+        83% {
+            transform: rotateY(90deg);
+        }
+    }
+    .box div {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+    }
+    .box .box1 {
+        background-image: url("https://images.pexels.com/photos/31299772/pexels-photo-31299772.jpeg?cs=srgb&dl=pexels-optical-chemist-340351297-31299772.jpg&fm=jpg");
+        background-size: cover;
+        background-position: center center;
+        transform: translateZ(100px);
+    }
+    .box .box2 {
+        background-image: url("https://poesiasinfronteras.net/wp-content/uploads/atardecer-vibrante-multicolor-playa.webp");
+        background-size: cover;
+        background-position: center center;
+        transform: rotateY(90deg) translateZ(100px);
+    }
+    .box .box3 {
+        background-image: url("https://1.bp.blogspot.com/-CHncKFdG7q4/XVRdNWnzrsI/AAAAAAAAAgY/fBjRVwkW1Y0toSc_DK2Wwr50Y-lZ866gACLcBGAs/s1600/Imagen-seleccionada_EDIIMA20190321_0838_5.jpg");
+        background-size: cover;
+        background-position: center center;
+        transform:rotateY(90deg) rotateX(90deg) translateZ(100px);
+    }
+    .box .box4 {
+        background-image: url("https://imgai.ai/_next/image?url=https%3A%2F%2Fcdn.imgai.ai%2Fimageai-page%2Fstable-diffusion3-01.webp&w=640&q=75");
+        background-size: cover;
+        background-position: center center;
+        transform: rotateY(180deg) rotateZ(90deg) translateZ(100px);
+    }
+    .box .box5 {
+        background-image: url("https://i0.wp.com/harshvardhanart.com/wp-content/uploads/2023/04/1000021301.jpg");
+        background-size: cover;
+        background-position: center center;
+        transform: rotateY(-90deg) rotateZ(90deg) translateZ(100px);
+    }
+    .box .box6 {
+        background-image: url("https://as1.ftcdn.net/v2/jpg/00/39/68/90/1000_F_39689003_t00fg0CtdBwQ0z92biZbATcrEuyTDTaw.jpg");
+        background-size: cover;
+        background-position: center center;
+        transform: rotateX(-90deg)  translateZ(100px);
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="box">
+            <div class="box1"></div>
+            <div class="box2"></div>
+            <div class="box3"></div>
+            <div class="box4"></div>
+            <div class="box5"></div>
+            <div class="box6"></div>
+        </div>
+    </div>
+</body>
+
+</html>
