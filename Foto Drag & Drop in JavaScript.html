@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foto Drag & Drop in JavaScript</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        display: grid;
+        height: 100%;
+        place-items: center;
+        background: #eb2bf9;
+    }
+
+    .wrapper {
+        width: 720px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .wrapper .box {
+        position: relative;
+        height: 280px;
+        width: 280px;
+        border-radius: 12px;
+        border: 2px solid #fff;
+    }
+
+    .box .image {
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+        background-image: url('https://wpadmin.uk2.net/app/uploads/sites/4/2016/06/shutterstock_441169243.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .hovered {
+        border: 2px dashed #fff;
+    }
+</style>
+
+<body>
+    <section class="wrapper">
+        <div class="box">
+            <div class="image" draggable="true"></div>
+        </div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </section>
+</body>
+<script>
+    const boxes = document.querySelectorAll(".box"),
+        image = document.querySelector(".image");
+
+    boxes.forEach((box) => {
+        box.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            box.classList.add('hovered');
+        });
+        box.addEventListener("dragleave", () => {
+            box.classList.remove('hovered');
+        });
+        box.addEventListener("drop", () => {
+            box.appendChild(image)
+            box.classList.add('hovered');
+        });
+    })
+
+</script>
+
+</html>
