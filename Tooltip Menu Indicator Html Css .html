@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tooltip Menu Indicator Html Css</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+    html ,body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        background: #212121;
+    }
+    .wrapper {
+        position: relative;
+        height: 80px;
+        width: 620px;
+        background-color: #ecf0f1;
+        border-radius: 17px;
+        box-shadow: 3px 7px 2px rgba(0, 0, 0, 0.1);
+    }
+    .wrapper ul {
+        display: flex;
+        justify-content: space-between;
+    }
+    .wrapper ul li {
+        position: relative;
+        list-style: none;
+        line-height: 85px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .tooltip {
+        position: absolute;
+        left: 0;
+        top: -20px;
+        height: 40px;
+        width: 100px;
+        background: #29fd53;
+        border-radius: 15px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+        left: 0.05px;
+        color: #000;
+        font-weight: 500;
+        pointer-events: none;
+        margin: 0 10px;
+        transition: 0.5s;
+        border: 6px solid #000;
+        opacity: 0;
+    }
+    .tooltip::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -22px;
+        width: 20px;
+        height: 20px;
+        background: transparent;
+        border-top-right-radius: 20px;
+        box-shadow: 0 -10px 0 0 #222327;
+    }
+    .tooltip::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -22px;
+        width: 20px;
+        height: 20px;
+        background: transparent;
+        border-top-left-radius: 20px;
+        box-shadow: 0 -10px 0 0 #222327;
+    }
+    .wrapper ul li:hover .tooltip {
+        transition: all 0.3s ease;
+        opacity: 1;
+    }
+    .wrapper ul li a {
+        display: block;
+        color: #000;
+        font-size: 1.5em;
+        margin: 0 50px;
+    }
+    
+</style>
+
+<body>
+    <div class="wrapper">
+        <ul>
+            <li>
+                <a href=""><ion-icon name="home-outline"></ion-icon></a>
+                <span class="tooltip">Home</span>
+            </li>
+            <li>
+                <a href=""><ion-icon name="chatbubbles-outline"></ion-icon></a>
+                <span class="tooltip">Messages</span>
+            </li>
+            <li>
+                <a href=""><ion-icon name="cart-outline"></ion-icon></a>
+                <span class="tooltip">Order</span>
+            </li>
+            <li>
+                <a href=""><ion-icon name="settings-outline"></ion-icon></a>
+                <span class="tooltip">Settings</span>
+            </li>
+            <li>
+                <a href=""><ion-icon name="log-out-outline"></ion-icon></a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</html>
