@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Clock Stopatch</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        background: #dcdde1;
+    }
+
+    .wrapper {
+        position: relative;
+        width: 400px;
+        background: #2d98da;
+        height: 200px;
+        box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.2) -7px -7px 7px rgba(0, 0, 0, 0.2);
+    }
+
+    .wrapper .display {
+        padding: 40px 35px;
+        position: relative;
+        font-size: 62px;
+        color: #fff;
+        font-family: serif;
+        font-weight: 600;
+    }
+
+    .wrapper .buttons {
+        position: absolute;
+        bottom: -10px;
+        padding: 0 40px;
+    }
+
+    .wrapper .buttons button {
+        outline: 0;
+        border: 0;
+        background: #fff;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-size: 18px;
+        padding: 10px 20px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="display">
+            00 : 00 : 000
+        </div>
+        <div class="buttons">
+            <button id="start">Start</button>
+            <button id="pause">Pause</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+</body>
+<script>
+    let [milliseconds, seconds, minutes] = [0, 0, 0];
+    let ref = document.querySelector(".display");
+    let str;
+
+    document.getElementById('start').addEventListener('click', () => {
+        str = setInterval(displayTimer, 10);
+    });
+    document.getElementById('pause').addEventListener('click', () => {
+        clearInterval(str);
+    });
+    document.getElementById('reset').addEventListener('click', () => {
+        clearInterval(str);
+        [milliseconds, seconds, minutes] = [0, 0, 0];
+        ref.innerHTML = "00 : 00 : 000";
+    });
+
+    function displayTimer() {
+        milliseconds += 10;
+        if (milliseconds == 1000) {
+            milliseconds = 0;
+            seconds++;
+            if (seconds == 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes == 60) {
+                    minutes = 0;
+                }
+            }
+        }
+        let m = minutes < 10 ? "0" + minutes : minutes;
+        let s = seconds < 10 ? "0" + seconds : seconds;
+        let ms = milliseconds < 10 ? "00" + milliseconds : milliseconds < 100 ? "0" + milliseconds : milliseconds;
+
+        ref.innerHTML = `${m} : ${s} : ${ms}`;
+    }
+</script>
+
+</html>
