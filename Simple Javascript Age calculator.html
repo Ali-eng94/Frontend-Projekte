@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    input {
+        padding: 20px;
+        font-size: 2rem;
+    }
+    p {
+        font-size: 2rem;
+    }
+    p #age {
+        font-size: 2rem;
+        color: red;
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <input type="date">
+        <p>You are <span id="age"> </span> years old.</p>
+    </div>
+</body>
+<script>
+    const inputDate = document.querySelector('input');
+    const age = document.getElementById('age');
+
+    inputDate.addEventListener('change', (e) => {
+        age.innerText = new Date().getFullYear()
+        - new Date(e.target.value).getFullYear();
+    })
+</script>
+</html>
