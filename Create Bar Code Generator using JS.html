@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <title>Create Bar Code Generator using JS</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        background-color: #212121;
+    }
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        background-color: #fff;
+        width: 600px;
+        height: 600px;
+        border-radius: 10px;
+    }
+    #urlInput {
+        padding: 15px;
+    }
+    button {
+        padding: 15px;
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <input type="text" id="urlInput" placeholder="Enter URL">
+        <div id="barcode-box">
+            <svg id="barcode"></svg>
+        </div>
+        <button onclick="generateBarcode()">
+                Generate Bar Code
+            </button>
+    </div>
+</body>
+<script>
+    function generateBarcode() {
+        const url = document.getElementById('urlInput').value;
+        if (url) {
+            JsBarcode('#barcode', url);
+        }
+    }
+</script>
+
+</html>
