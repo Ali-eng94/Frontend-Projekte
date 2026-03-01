@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Flip Text Animation Using CSS</title>
+
+<style>
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.flip-wrapper {
+    height: 50px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.flip-track {
+    display: flex;
+    flex-direction: column;
+    animation: flip 6s infinite;
+}
+
+.flip-item {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.portfolio {
+    background: #83248f;
+}
+
+.landing {
+    background: #3bae6b;
+}
+
+.websites {
+    background: #dc143c;
+}
+
+@keyframes flip {
+    0%, 20% {
+        transform: translateY(0);
+    }
+    33%, 53% {
+        transform: translateY(-50px);
+    }
+    66%, 86% {
+        transform: translateY(-100px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    Create
+    <div class="flip-wrapper">
+        <div class="flip-track">
+            <div class="flip-item portfolio">Portfolio</div>
+            <div class="flip-item landing">Landing</div>
+            <div class="flip-item websites">Websites</div>
+        </div>
+    </div>
+    with Kodfy!
+</div>
+
+</body>
+</html>
