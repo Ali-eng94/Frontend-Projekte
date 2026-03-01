@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Hover Effect Using Css</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
+        background: #212121;
+    }
+    img {
+        width: 600px;
+        aspect-ratio: 1;
+        outline: calc(600px/2) solid #0009;
+        outline-offset: calc(600px/-2);
+        cursor: pointer;
+        transition: .3s;
+    }
+    img:hover {
+        outline: 8px solid #4eddc4;
+        outline-offset: 14px;
+    }
+</style>
+<body>
+    <img src="https://www.mamp.one/wp-content/uploads/2024/09/image-resources2.jpg" alt="">
+</body>
+</html>
