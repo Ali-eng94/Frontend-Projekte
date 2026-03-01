@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Image Into Pieces Using Css</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    }
+    .split-image-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 600px;
+        height: 600px;
+        cursor: pointer;
+        gap: 0;
+    }
+    .quadrant {
+        background-image: url('https://www.mamp.one/wp-content/uploads/2024/09/image-resources2.jpg');
+        background-size: 600px 600px;
+        transition: transform 0.3s ease;
+    }
+    .q1 {
+        background-position: top left;
+    }
+    .q2 {
+        background-position: top right;
+    }
+    .q3 {
+        background-position: bottom left;
+    }
+    .q4 {
+        background-position: bottom right;
+    }
+    .split-image-container:hover .q1{
+        transform: translate(-10px, -10px);
+    }
+    .split-image-container:hover .q2{
+        transform: translate(10px, -10px);
+    }
+    .split-image-container:hover .q3{
+        transform: translate(-10px, 10px);
+    }
+    .split-image-container:hover .q4{
+        transform: translate(10px, 10px);
+    }
+</style>
+<body>
+    <div class="split-image-container">
+        <div class="quadrant q1"></div>
+        <div class="quadrant q2"></div>
+        <div class="quadrant q3"></div>
+        <div class="quadrant q4"></div>
+    </div>
+</body>
+</html>
